@@ -4,10 +4,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 
-const ThemeContext = createContext({ theme: "dark", toggle: () => {} });
+const ThemeContext = createContext({ theme: "light", toggle: () => {} });
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState("dark");
-  useEffect(() => { const saved = localStorage.getItem("raymon-theme"); const next = saved ?? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); setTheme(next); document.documentElement.dataset.theme = next; }, []);
+  const [theme, setTheme] = useState("light");
+  useEffect(() => { const saved = localStorage.getItem("raymon-theme"); const next = saved ?? "light"; setTheme(next); document.documentElement.dataset.theme = next; }, []);
   const toggle = () => { const next = theme === "dark" ? "light" : "dark"; setTheme(next); document.documentElement.dataset.theme = next; localStorage.setItem("raymon-theme", next); };
   return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
 }

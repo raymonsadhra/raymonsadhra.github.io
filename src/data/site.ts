@@ -1,5 +1,5 @@
 export const navItems = [
-  ["Work", "/work"], ["Experience", "/experience"], ["Research", "/research"],
+  ["Work", "/work"], ["Experience", "/experience"],
   ["About", "/about"], ["Life", "/life"], ["Contact", "/contact"],
 ] as const;
 
