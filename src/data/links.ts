@@ -12,6 +12,7 @@ export const links = {
     "ghost-runner": { github: null, live: null, video: null, award: null },
     "minecraft-settlement-generator": { github: null, live: null, video: null, paper: null, conference: null },
     "biomedical-ai": { github: null, paper: null },
+    "causeway": { github: null, live: null, video: null },
     "rights-now": { github: null, live: null },
     "fridge-friend": { github: null, live: null },
     "word-on-the-blog": { github: null, live: null },

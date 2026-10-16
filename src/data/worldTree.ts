@@ -8,6 +8,7 @@ export const projectTreePositions: Record<string, { side: "left" | "right"; leve
   "ghost-runner": { side: "right", level: 1 },
   "minecraft-settlement-generator": { side: "left", level: 2 },
   "biomedical-ai": { side: "right", level: 2 },
+  causeway: { side: "left", level: 3 },
 };
 
 export const experienceTreePositions: Record<string, { side: "left" | "right" }> = {

@@ -30,6 +30,8 @@ All content is separated from layout:
 
 To add a project, duplicate a typed entry in `src/data/projects.ts`, give it a unique slug, and add any real URLs under the same slug in `src/data/links.ts`. Published detail pages are controlled by `generateStaticParams` in `src/app/work/[slug]/page.tsx`; draft entries marked with `needsInfo` remain out of the public route list until their facts are complete.
 
+Causeway is intentionally published as a clearly marked draft using `publishDraft: true`. Confirm the role, features, Causeway-specific technologies, team contribution, impact, and media in `src/data/projects.ts` before removing its `needsInfo` list. Add owned screenshots or video under `public/images/projects/causeway/` and configure them in `src/data/media.ts`; add only real repository or demo URLs in `src/data/links.ts`.
+
 ### Add real media
 
 1. Put a portrait in `public/images/profile/` and set `media.profile.portrait` to `/images/profile/filename.jpg`.

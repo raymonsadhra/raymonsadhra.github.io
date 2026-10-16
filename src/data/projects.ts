@@ -4,6 +4,7 @@ export type Project = {
   stack: string[]; year: string; tone: "cyan" | "amber" | "violet" | "coral" | "lime" | "blue";
   featured: boolean; status?: string; problem: string; role: string; architecture: string[];
   decisions: string[]; result: string; media: string[]; needsInfo?: string[];
+  publishDraft?: boolean;
 };
 
 export const projects: Project[] = [
@@ -43,6 +44,19 @@ export const projects: Project[] = [
     architecture: ["Molecular trajectories", "Fingerprints + protein embeddings", "Graph neural network", "Force-matching objective"],
     decisions: ["Combined structural and learned molecular representations", "Used GPU training for graph workloads", "Kept evaluation claims out until verified"],
     result: "An active scientific ML research direction; no unverified performance metrics are presented.", media: ["Molecular graph", "Training pipeline", "Research plot"],
+  },
+  {
+    slug: "causeway", title: "Causeway", kicker: "UCSC Tech4Good Lab",
+    summary: "A role-based collaborative learning platform designed around contributing to real-world projects through focused, progressively connected work.",
+    categories: ["Web & Mobile", "Research"], stack: ["TypeScript", "Micro-role hierarchies", "Collaborative workflows"], year: "Tech4Good", tone: "lime", featured: false,
+    problem: "Situated learning can be difficult to scale when mentoring and project coordination require substantial time. Causeway explores micro-role hierarchies that help learners contribute to larger real-world projects through bounded roles.",
+    role: "Contributor through UCSC Tech4Good Lab; specific role and ownership details are awaiting confirmation.",
+    architecture: ["Role-based learning pathway", "Micro-role hierarchy", "Collaborative project workflow", "Progressive contribution model"],
+    decisions: ["Project-specific implementation details are intentionally withheld until confirmed", "The portfolio distinguishes public research context from individual contribution", "Media slots remain conceptual until real screenshots are supplied"],
+    result: "Contribution details and individual impact are awaiting confirmation.",
+    media: ["Conceptual role pathway", "Collaboration model", "Screenshot slot"],
+    needsInfo: ["Specific role", "Features implemented", "Causeway-specific technology stack", "Technical challenges", "Team contribution", "Validated impact", "Screenshots or demo"],
+    publishDraft: true,
   },
   {
     slug: "rights-now", title: "RightsNow", kicker: "AI-assisted information access", summary: "A configurable speech-to-guidance application built with modern transcription and language models.", categories: ["AI & ML", "Web & Mobile"], stack: ["Python", "Whisper", "Gemini", "React", "Node.js"], year: "Project", tone: "coral", featured: false,

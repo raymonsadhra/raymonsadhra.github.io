@@ -9,6 +9,7 @@ export const media = {
     "ghost-runner": { cover: null, gallery: [], video: null },
     "minecraft-settlement-generator": { cover: null, gallery: [], video: null },
     "biomedical-ai": { cover: null, gallery: [], video: null },
+    "causeway": { cover: null, gallery: [], video: null },
     "rights-now": { cover: null, gallery: [], video: null },
     "fridge-friend": { cover: null, gallery: [], video: null },
     "word-on-the-blog": { cover: null, gallery: [], video: null },

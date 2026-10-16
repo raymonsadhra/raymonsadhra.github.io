@@ -12,8 +12,13 @@ import { projects } from "@/data/projects";
 import { experienceTreePositions, projectTreePositions, treeRegions } from "@/data/worldTree";
 import { withBasePath } from "@/data/siteEnvironment";
 
-const publishedProjects = projects.filter((project) => !project.needsInfo && project.slug !== "word-on-the-blog");
-const archiveProjects = projects.filter((project) => project.needsInfo || project.slug === "word-on-the-blog");
+const canopyProjects = projects.filter((project) => project.featured);
+const causeway = projects.find((project) => project.slug === "causeway");
+const archiveProjects = projects.filter((project) => !project.featured && project.slug !== "causeway");
+
+function SkyAtmosphere() {
+  return <div className="tropical-sky" aria-hidden="true"><div className="sun-wash"/><svg className="cloud cloud-one" viewBox="0 0 320 120"><path d="M13 94c5-27 28-42 53-38 10-32 57-41 79-14 25-36 82-22 86 19 35-8 70 9 77 33H13Z"/></svg><svg className="cloud cloud-two" viewBox="0 0 360 130"><path d="M8 106c8-29 35-44 64-37 17-45 79-53 106-17 30-27 83-16 94 23 38-10 74 4 82 31H8Z"/></svg><svg className="cloud cloud-three" viewBox="0 0 280 105"><path d="M7 89c8-24 30-34 52-29 15-36 67-40 88-10 28-20 67-6 72 27 28-5 49 2 56 12H7Z"/></svg></div>;
+}
 
 function WorldTreeIllustration() {
   const sprays = [
@@ -25,13 +30,17 @@ function WorldTreeIllustration() {
     <defs>
       <linearGradient id="v4-bark" x1="0" x2="1"><stop stopColor="#65452f"/><stop offset=".48" stopColor="#8b6242"/><stop offset="1" stopColor="#513724"/></linearGradient>
       <linearGradient id="v4-leaf" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#9aad7e"/><stop offset=".55" stopColor="#426f53"/><stop offset="1" stopColor="#173f31"/></linearGradient>
+      <linearGradient id="v5-bark-light" x1="0" y1="0" x2="1" y2="0"><stop stopColor="#4d2d1d"/><stop offset=".25" stopColor="#9a6740"/><stop offset=".52" stopColor="#bd8755"/><stop offset=".78" stopColor="#75442a"/><stop offset="1" stopColor="#3e281c"/></linearGradient>
+      <pattern id="bark-grain" width="46" height="86" patternUnits="userSpaceOnUse"><path d="M6 5c18 23-7 39 10 70M32 0c-14 19 11 36-5 80M20 17c9 11-6 21 2 32" fill="none" stroke="#f0c58b" strokeOpacity=".2" strokeWidth="2"/></pattern>
       <filter id="v4-shadow"><feDropShadow dx="0" dy="14" stdDeviation="16" floodColor="#173f31" floodOpacity=".14"/></filter>
       <g id="leaf-spray"><path d="M0 28C26-8 69-2 78 30C52 49 21 49 0 28Z"/><path d="M55 36c24-37 66-28 79 2-20 25-53 29-79-2Z"/><path d="M30 7C42-25 81-29 96-4 2 7-6 13-30 11Z" transform="translate(14 20)"/><path className="leaf-vein" d="M8 27c38-7 74-4 112 9"/></g>
     </defs>
     <path className="world-canopy-mass canopy-a" d="M30 730C-15 360 205 95 490 165 675 0 1050 95 1153 376c76 204-26 446-201 520-186 78-618 53-802-12C76 858 42 806 30 730Z"/>
     <path className="world-canopy-mass canopy-b" d="M112 1240c-75-275 126-534 383-469 215-139 538-38 604 210 55 206-95 397-269 420-202 27-649 38-718-161Z"/>
     <path className="world-tree-trunk" filter="url(#v4-shadow)" d="M512 5720c-18-372 30-731 66-1084 31-304 33-621-4-929-43-354-64-702-11-1049 53-349 72-662 8-1003-39-207-29-441 21-642 35-141 28-342-4-525 99 193 142 377 112 566-27 167-22 357 23 516 97 346 92 716 42 1077-45 326-23 664 15 997 38 333 34 681-4 1009-42 364-20 728 28 1067l-292 0Z"/>
+    <path className="world-bark-texture" d="M512 5720c-18-372 30-731 66-1084 31-304 33-621-4-929-43-354-64-702-11-1049 53-349 72-662 8-1003-39-207-29-441 21-642 35-141 28-342-4-525 99 193 142 377 112 566-27 167-22 357 23 516 97 346 92 716 42 1077-45 326-23 664 15 997 38 333 34 681-4 1009-42 364-20 728 28 1067Z"/>
     <path className="world-tree-highlight" d="M625 5550c-11-575 96-1034 35-1572-60-527 60-1005 42-1528-9-269 35-563-12-829-38-216-18-429 2-622"/>
+    <g className="bark-contours"><path d="M590 5150c75-250-28-470 38-720M684 3990c-62-230 30-455-18-660M620 2920c74-230-35-427 34-640M676 1840c-58-173 17-337-12-515"/><path d="M574 4610c25-27 57-27 81-2-18 36-58 44-81 2Z"/><path d="M676 3500c21-23 49-21 67 2-19 30-48 32-67-2Z"/></g>
     <g className="world-branches">
       <path className="branch branch-rag-motion" d="M634 970C505 765 387 650 115 565"/>
       <path className="branch branch-ghost-runner" d="M659 950C782 731 917 616 1123 550"/>
@@ -55,18 +64,14 @@ function WorldTreeIllustration() {
   </svg>;
 }
 
-function ProjectBranch({ project, index, onActive }: { project: (typeof publishedProjects)[number]; index: number; onActive: (slug: string) => void }) {
+function ProjectBranch({ project, index, onActive }: { project: (typeof projects)[number]; index: number; onActive: (slug: string) => void }) {
   const [active, setActive] = useState(false);
   const position = projectTreePositions[project.slug] ?? { side: index % 2 ? "right" as const : "left" as const, level: Math.floor(index / 2) + 1 };
   const activate=()=>{setActive(true);onActive(project.slug)};const clear=()=>{setActive(false);onActive("none")};
-  return <article className={`world-project ${position.side} level-${position.level} ${active ? "active" : ""}`} onMouseEnter={activate} onMouseLeave={clear} onFocus={activate} onBlur={clear}>
-    <div className="leaf-cluster" aria-hidden="true"><i/><i/><i/><i/><span/></div>
-    <div className="world-card-inner">
-      <div className="world-card-top"><span>0{index+1} · {project.kicker}</span>{project.status&&<strong>{project.status}</strong>}</div>
-      <h2>{project.title}</h2><p>{project.summary}</p>
-      <div className="world-tags">{project.stack.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div>
-      <Link href={`/work/${project.slug}`}>Explore case study <ArrowUpRight size={15}/></Link>
-    </div>
+  return <article className={`world-project ${position.side} level-${position.level} leaf-${index%4} ${active ? "active" : ""}`} onMouseEnter={activate} onMouseLeave={clear} onFocus={activate} onBlur={clear}>
+    <span className="project-stem" aria-hidden="true"/>
+    <Link className="project-leaf" href={`/work/${project.slug}`} aria-label={`Open ${project.title} case study`}><span className="leaf-rib" aria-hidden="true"/><span className="leaf-veins" aria-hidden="true"/><span className="leaf-kicker">{project.kicker}</span><strong>{project.title}</strong>{project.status&&<small>{project.status}</small>}<span className="leaf-action">Open project <ArrowUpRight size={14}/></span></Link>
+    <div className="project-leaf-detail"><p>{project.summary}</p><div className="world-tags">{project.stack.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div></div>
   </article>;
 }
 
@@ -88,12 +93,12 @@ export function WorldTreeHome() {
   },[]);
 
   return <div className="world-tree-home" data-focus={focus}>
-    <WorldTreeIllustration/><TreeProgress active={activeRegion}/>
+    <SkyAtmosphere/><WorldTreeIllustration/><TreeProgress active={activeRegion}/>
 
     <section className="world-region canopy-region" id="projects" aria-labelledby="projects-title">
       <div className="world-intro"><p className="world-hello">hi, i&apos;m Raymon.</p><h1 id="projects-title">Software engineer,<br/>researcher, and <em>builder.</em></h1><p>M.S. Computer Science @ UC San Diego</p><a href="#project-branches">Explore the tree <ArrowDown size={16}/></a></div>
       <p className="canopy-note"><Sprout size={15}/> Projects grow along the canopy. Follow a branch.</p>
-      <div className="project-branches" id="project-branches">{publishedProjects.map((project,index)=><ProjectBranch project={project} index={index} onActive={setFocus} key={project.slug}/>)}</div>
+      <div className="project-branches" id="project-branches">{canopyProjects.map((project,index)=><ProjectBranch project={project} index={index} onActive={setFocus} key={project.slug}/>)}</div>
       <div className="seedling-projects"><span>Also growing</span>{archiveProjects.map(project=><span key={project.slug}>{project.title}</span>)}<Link href="/work">Project archive →</Link></div>
     </section>
 
@@ -108,7 +113,7 @@ export function WorldTreeHome() {
     <section className="world-region experience-region" id="experience" aria-labelledby="experience-title">
       <div className="region-label"><span>03</span><p>Main branches</p></div>
       <header className="branch-heading"><p className="eyebrow">Experience</p><h2 id="experience-title">Built under<br/><em>real constraints.</em></h2><p>Engineering and research across infrastructure, developer tools, scientific ML, procedural generation, and products.</p></header>
-      <div className="experience-branches">{experiences.map((item,index)=>{const side=experienceTreePositions[item.org]?.side??(index%2?"right":"left");return <article key={item.org} className={`experience-branch ${side}`} onMouseEnter={()=>setFocus("experience")} onMouseLeave={()=>setFocus("none")}><span className="branch-node" aria-hidden="true"/><div><span className="experience-kicker">0{index+1} · {item.date}</span><h3>{item.org}</h3><strong>{item.role}</strong><p>{item.contributions[0]}</p><div className="world-tags">{item.tech.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div></div></article>})}</div>
+      <div className="experience-branches">{experiences.map((item,index)=>{const side=experienceTreePositions[item.org]?.side??(index%2?"right":"left");return <article key={item.org} className={`experience-branch ${side}`} onMouseEnter={()=>setFocus("experience")} onMouseLeave={()=>setFocus("none")}><span className="branch-node" aria-hidden="true"/><div className="experience-leaf-body"><span className="experience-kicker">0{index+1} · {item.date}</span><h3>{item.org}</h3><strong>{item.role}</strong><p>{item.contributions[0]}</p><div className="world-tags">{item.tech.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div>{item.org==="Tech4Good"&&causeway&&<Link className="causeway-sprout" href="/work/causeway"><i aria-hidden="true"/><span><small>Connected project</small><b>Causeway</b></span><ArrowUpRight size={15}/></Link>}</div></article>})}</div>
       <Link className="text-link experience-link" href="/experience">Full experience <ArrowUpRight size={15}/></Link>
     </section>
 
@@ -119,6 +124,7 @@ export function WorldTreeHome() {
     </section>
 
     <section className="world-region life-region" id="life" aria-labelledby="life-title">
+      <div className="ground-boundary" aria-hidden="true"><span className="ground-shadow"/><div className="grass-blades">{Array.from({length:18},(_,index)=><i key={index}/>)}</div><div className="fern fern-left"><i/><i/><i/></div><div className="fern fern-right"><i/><i/><i/></div></div><div className="soil-texture" aria-hidden="true"><i/><i/><i/><i/><i/><i/></div>
       <div className="region-label"><span>05</span><p>The roots</p></div>
       <header><p className="eyebrow">Beyond code</p><h2 id="life-title">The life around<br/><em>the work.</em></h2><p>A future photo journal for places, people, memories, and the ordinary moments worth keeping.</p></header>
       <div className="root-scrapbook">{lifeEntries.map((entry,index)=><article className={`root-photo ${entry.layout}`} key={entry.slug} style={{"--tilt":`${index%2?2.5:-2.5}deg`} as React.CSSProperties}>{entry.photos[0]?<Image src={withBasePath(entry.photos[0])} alt={entry.caption} width={900} height={700}/>:<div className="photo-placeholder"><span>Photo {String(index+1).padStart(2,"0")}</span><small>Reserved for your photograph</small></div>}<div><span>{entry.date}</span><h3>{entry.title}</h3><p>{entry.caption}</p></div></article>)}</div>
@@ -126,7 +132,7 @@ export function WorldTreeHome() {
     </section>
 
     <section className="world-region ground-region" id="contact" aria-labelledby="contact-title">
-      <div className="ground-line" aria-hidden="true"/><div><p className="eyebrow">Where the roots meet the ground</p><h2 id="contact-title">Let&apos;s build something<br/><em>interesting.</em></h2><p>I&apos;m interested in ambitious engineering, thoughtful products, and research that becomes useful.</p><div className="ground-actions">{hasLink(links.email)?<a className="button" href={`mailto:${links.email}`}>Send an email <ArrowUpRight size={16}/></a>:<Link className="button" href="/contact">Contact details <ArrowUpRight size={16}/></Link>}{hasLink(links.github)&&<a href={withBasePath(links.github)}>GitHub</a>}{hasLink(links.linkedin)&&<a href={withBasePath(links.linkedin)}>LinkedIn</a>}{hasLink(links.resume)&&<a href={withBasePath(links.resume)}>Résumé</a>}</div></div><p className="ground-signoff">Raymon Sadhra · California · Rooted in curiosity</p>
+      <div className="ground-line" aria-hidden="true"/><div><p className="eyebrow">Among the deepest roots</p><h2 id="contact-title">Let&apos;s build something<br/><em>interesting.</em></h2><p>I&apos;m interested in ambitious engineering, thoughtful products, and research that becomes useful.</p><div className="ground-actions">{hasLink(links.email)?<a className="button" href={`mailto:${links.email}`}>Send an email <ArrowUpRight size={16}/></a>:<Link className="button" href="/contact">Contact details <ArrowUpRight size={16}/></Link>}{hasLink(links.github)&&<a href={withBasePath(links.github)}>GitHub</a>}{hasLink(links.linkedin)&&<a href={withBasePath(links.linkedin)}>LinkedIn</a>}{hasLink(links.resume)&&<a href={withBasePath(links.resume)}>Résumé</a>}</div></div><p className="ground-signoff">Raymon Sadhra · California · Rooted in curiosity</p>
     </section>
   </div>;
 }
