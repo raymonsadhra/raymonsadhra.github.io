@@ -1,6 +1,7 @@
 export const navItems = [
-  ["Work", "/work"], ["Experience", "/experience"],
-  ["About", "/about"], ["Life", "/life"], ["Contact", "/contact"],
+  ["Home", "/#projects"], ["Projects", "/#projects"],
+  ["Experience", "/#experience"], ["Research", "/#research"],
+  ["About", "/#about"], ["Life", "/#life"], ["Contact", "/#contact"],
 ] as const;
 
 export const nowItems = [

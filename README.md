@@ -28,6 +28,8 @@ All content is separated from layout:
 - `src/data/site.ts`: navigation, “Now” items, and skill groups.
 - `src/data/media.ts`: portrait, gallery, video, and research asset paths.
 
+To add a project, duplicate a typed entry in `src/data/projects.ts`, give it a unique slug, and add any real URLs under the same slug in `src/data/links.ts`. Published detail pages are controlled by `generateStaticParams` in `src/app/work/[slug]/page.tsx`; draft entries marked with `needsInfo` remain out of the public route list until their facts are complete.
+
 ### Add real media
 
 1. Put a portrait in `public/images/profile/` and set `media.profile.portrait` to `/images/profile/filename.jpg`.
@@ -42,19 +44,60 @@ Use descriptive filenames, optimized WebP/AVIF/JPEG files, useful alt text when 
 
 Visit `/life/editor`. It stores drafts only in that browser’s `localStorage`; it never claims to modify the deployed filesystem. Export the JSON, review it, and copy verified entries into `src/data/life.ts`. Import restores an exported draft locally.
 
+### Edit the World Tree
+
+The homepage reads project and experience copy directly from `src/data/projects.ts` and `src/data/experience.ts`. `src/data/worldTree.ts` contains only presentation hints:
+
+- `projectTreePositions` selects the left/right canopy branch and vertical level for a project slug.
+- `experienceTreePositions` selects the left/right side for an organization.
+- Entries without an explicit mapping fall back to an alternating, stacked position so new content remains readable.
+
+Add or edit facts in their original data file first, then optionally add a placement hint. The shared tree geometry lives in `src/components/WorldTreeHome.tsx`; routine content changes should not require editing its SVG.
+
 ## Routes
 
 `/`, `/work`, `/work/[slug]`, `/experience`, `/research`, `/about`, `/life`, `/life/editor`, and `/contact`.
 
-## Deploy to Vercel
+## GitHub Pages deployment
 
-1. Push the repository to GitHub/GitLab/Bitbucket.
-2. Import it in Vercel as a Next.js project.
-3. Build command: `npm run build`.
-4. The site uses `output: "export"`, producing `out/`; Vercel detects this automatically.
-5. Replace the Sites URL in `src/app/layout.tsx`, `src/app/robots.ts`, and `src/app/sitemap.ts` after connecting a custom domain.
+The project is compatible with GitHub Pages because `next.config.ts` uses `output: "export"` and the complete site is emitted to `out/`. Browser-local theme and journal features do not need a server.
 
-No API keys, paid services, or server runtime are required. Core interactions are browser-local. The contact area intentionally shows no fake form; email and profile CTAs activate only after real values are configured.
+The workflow at `.github/workflows/deploy.yml` runs on every push to `main`. It installs the locked dependencies, runs TypeScript, ESLint, tests, and the production build, then publishes `out/` with the official GitHub Pages actions. It automatically uses no base path for a `<username>.github.io` user site and uses `/<repository>` for a project site. Canonical metadata, sitemap URLs, Next.js routes, and public media paths receive the corresponding deployment URL at build time.
+
+After the repository exists, open **Settings → Pages → Build and deployment** and select **GitHub Actions**. GitHub Pages is available for public repositories on GitHub Free; private-repository Pages availability depends on the account or organization plan.
+
+### Publish an update
+
+```bash
+git add .
+git commit -m "Describe the portfolio update"
+git push origin main
+```
+
+Open the repository’s **Actions** tab and select **Deploy portfolio to GitHub Pages** to see each quality check and the deployment URL. A green deployment job means that GitHub Pages accepted the generated artifact.
+
+To roll back a broken deployment, revert the offending commit and push the revert:
+
+```bash
+git revert <commit-sha>
+git push origin main
+```
+
+The workflow will deploy the restored source as a new Pages deployment. Do not force-push `main` for a normal rollback.
+
+GitHub Pages cannot provide a server runtime, private environment variables, database writes, or authenticated upload endpoints. This portfolio currently requires none of those: `/life/editor` remains local to each browser and every case-study route is pre-rendered. A custom domain is configured in the repository’s Pages settings, then pointed to GitHub with the DNS records it supplies; keep a `CNAME` file in the published artifact when using one.
+
+### Custom domain
+
+1. Verify the domain under **GitHub account settings → Pages → Verified domains**.
+2. Open the repository’s **Settings → Pages** and enter the domain under **Custom domain**.
+3. For `www`, create the CNAME record GitHub supplies. For an apex domain, use GitHub’s documented A/AAAA records.
+4. Wait for DNS verification, then enable **Enforce HTTPS**.
+5. Set `NEXT_PUBLIC_SITE_URL` to the final `https://` origin in the deployment workflow and include a `public/CNAME` file containing only the hostname.
+
+Do not add the `CNAME` file until the domain is owned and ready. The free `github.io` address works without one.
+
+No API keys, paid services, or server runtime are required. The contact area intentionally shows no fake form; email and profile CTAs activate only after real values are configured.
 
 ## Before public launch
 

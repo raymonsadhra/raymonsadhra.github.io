@@ -5,3 +5,7 @@ out/
 *.log
 .env*
 !.env.example
+.openai/
+*.tsbuildinfo
+coverage/
+.vercel/

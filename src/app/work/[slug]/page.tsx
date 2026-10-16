@@ -6,6 +6,7 @@ import { links } from "@/data/links";
 import { ProjectVisual } from "@/components/ProjectVisual";
 import { TimelineDiagram } from "@/components/TimelineDiagram";
 import { ResearchDiagram } from "@/components/ResearchDiagram";
+import { withBasePath } from "@/data/siteEnvironment";
 export const dynamicParams = false;
 export function generateStaticParams(){return projects.filter(project=>!project.needsInfo&&project.slug!=="word-on-the-blog").map(({slug})=>({slug}))}
 export default async function ProjectPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const project=getProject(slug);if(!project)notFound();const projectLinks=links.projects[slug as keyof typeof links.projects];return <>
@@ -14,5 +15,5 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
   {slug==="rag-motion"&&<section className="case-feature"><p className="eyebrow">Evidence, aligned in time</p><h2>A question is only as good as the context around it.</h2><TimelineDiagram/></section>}
   {slug==="minecraft-settlement-generator"&&<section className="case-feature"><p className="eyebrow">Paths that belong to the terrain</p><h2>Roads emerge from constraints, not decoration.</h2><ResearchDiagram/></section>}
   <section className="architecture"><p className="eyebrow">System map</p><h2>From input to outcome.</h2><div>{project.architecture.map((step,i)=><div key={step}><span>0{i+1}</span><strong>{step}</strong>{i<project.architecture.length-1&&<ExternalLink size={14}/>}</div>)}</div></section>
-  {projectLinks&&Object.values(projectLinks).some(Boolean)&&<div className="case-links">{Object.entries(projectLinks).filter(([,url])=>url).map(([label,url])=><a className="button secondary" key={label} href={url!}>{label} <ExternalLink size={15}/></a>)}</div>}
+  {projectLinks&&Object.values(projectLinks).some(Boolean)&&<div className="case-links">{Object.entries(projectLinks).filter(([,url])=>url).map(([label,url])=><a className="button secondary" key={label} href={withBasePath(url!)}>{label} <ExternalLink size={15}/></a>)}</div>}
   </article></>}
