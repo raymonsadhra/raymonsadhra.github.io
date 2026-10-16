@@ -1,0 +1,1 @@
+export function SectionHeader({index,label,title,copy}:{index?:string;label:string;title:string;copy?:string}) { return <div className="section-header"><div><p className="eyebrow">{index&&<span>{index}</span>} {label}</p><h2 className="headline">{title}</h2></div>{copy&&<p className="lede">{copy}</p>}</div> }

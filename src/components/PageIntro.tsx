@@ -1,0 +1,1 @@
+export function PageIntro({eyebrow,title,copy,aside}:{eyebrow:string;title:string;copy:string;aside?:string}){return <header className="page-intro shell"><p className="eyebrow">{eyebrow}</p><div><h1>{title}</h1><div><p>{copy}</p>{aside&&<small>{aside}</small>}</div></div></header>}

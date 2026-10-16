@@ -1,0 +1,1 @@
+export function ResearchDiagram(){return <div className="research-diagram" aria-label="Conceptual terrain settlement pipeline"><div className="terrain-lines"/><div className="road r1"/><div className="road r2"/><i className="house h1"/><i className="house h2"/><i className="house h3"/><span>conceptual terrain model</span></div>}
