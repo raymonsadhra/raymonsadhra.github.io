@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ArrowDown, ArrowUpRight, BookOpen, GraduationCap, MapPin, Sprout } from "lucide-react";
 import { useEffect, useState } from "react";
 import { experiences } from "@/data/experience";
-import { lifeEntries } from "@/data/life";
 import { links, hasLink } from "@/data/links";
 import { media } from "@/data/media";
 import { projects } from "@/data/projects";
@@ -17,7 +16,11 @@ const causeway = projects.find((project) => project.slug === "causeway");
 const archiveProjects = projects.filter((project) => !project.featured && project.slug !== "causeway");
 
 function SkyAtmosphere() {
-  return <div className="tropical-sky" aria-hidden="true"><div className="sun-wash"/><svg className="cloud cloud-one" viewBox="0 0 320 120"><path d="M13 94c5-27 28-42 53-38 10-32 57-41 79-14 25-36 82-22 86 19 35-8 70 9 77 33H13Z"/></svg><svg className="cloud cloud-two" viewBox="0 0 360 130"><path d="M8 106c8-29 35-44 64-37 17-45 79-53 106-17 30-27 83-16 94 23 38-10 74 4 82 31H8Z"/></svg><svg className="cloud cloud-three" viewBox="0 0 280 105"><path d="M7 89c8-24 30-34 52-29 15-36 67-40 88-10 28-20 67-6 72 27 28-5 49 2 56 12H7Z"/></svg></div>;
+  return <div className="tropical-sky" aria-hidden="true"><svg className="cloud cloud-one" viewBox="0 0 320 120"><path d="M13 94c5-27 28-42 53-38 10-32 57-41 79-14 25-36 82-22 86 19 35-8 70 9 77 33H13Z"/></svg><svg className="cloud cloud-two" viewBox="0 0 360 130"><path d="M8 106c8-29 35-44 64-37 17-45 79-53 106-17 30-27 83-16 94 23 38-10 74 4 82 31H8Z"/></svg><svg className="cloud cloud-three" viewBox="0 0 280 105"><path d="M7 89c8-24 30-34 52-29 15-36 67-40 88-10 28-20 67-6 72 27 28-5 49 2 56 12H7Z"/></svg></div>;
+}
+
+function SunIntroduction() {
+  return <div className="sun-introduction"><div className="sun-rays" aria-hidden="true">{Array.from({length:16},(_,index)=><i key={index} style={{"--ray":index} as React.CSSProperties}/>)}</div><div className="sun-disc"><span className="sun-texture" aria-hidden="true"/><p className="world-hello">hi, i&apos;m Raymon.</p><h1 id="projects-title">Software engineer,<br/>researcher, and <em>builder.</em></h1><p>M.S. Computer Science @ UC San Diego</p></div><p className="sky-limit">The sky&apos;s the limit.</p><a href="#project-branches">Explore the canopy <ArrowDown size={16}/></a></div>;
 }
 
 function WorldTreeIllustration() {
@@ -70,7 +73,8 @@ function ProjectBranch({ project, index, onActive }: { project: (typeof projects
   const activate=()=>{setActive(true);onActive(project.slug)};const clear=()=>{setActive(false);onActive("none")};
   return <article className={`world-project ${position.side} level-${position.level} leaf-${index%4} ${active ? "active" : ""}`} onMouseEnter={activate} onMouseLeave={clear} onFocus={activate} onBlur={clear}>
     <span className="project-stem" aria-hidden="true"/>
-    <Link className="project-leaf" href={`/work/${project.slug}`} aria-label={`Open ${project.title} case study`}><span className="leaf-rib" aria-hidden="true"/><span className="leaf-veins" aria-hidden="true"/><span className="leaf-kicker">{project.kicker}</span><strong>{project.title}</strong>{project.status&&<small>{project.status}</small>}<span className="leaf-action">Open project <ArrowUpRight size={14}/></span></Link>
+    <div className="foliage-crown" aria-hidden="true">{Array.from({length:9},(_,leaf)=><i key={leaf}><span/></i>)}</div>
+    <Link className="foliage-label" href={`/work/${project.slug}`} aria-label={`Open ${project.title} case study`}><span className="leaf-kicker">{project.kicker}</span><strong>{project.title}</strong>{project.status&&<small>{project.status}</small>}<span className="leaf-action">Explore project <ArrowUpRight size={14}/></span></Link>
     <div className="project-leaf-detail"><p>{project.summary}</p><div className="world-tags">{project.stack.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div></div>
   </article>;
 }
@@ -96,7 +100,7 @@ export function WorldTreeHome() {
     <SkyAtmosphere/><WorldTreeIllustration/><TreeProgress active={activeRegion}/>
 
     <section className="world-region canopy-region" id="projects" aria-labelledby="projects-title">
-      <div className="world-intro"><p className="world-hello">hi, i&apos;m Raymon.</p><h1 id="projects-title">Software engineer,<br/>researcher, and <em>builder.</em></h1><p>M.S. Computer Science @ UC San Diego</p><a href="#project-branches">Explore the tree <ArrowDown size={16}/></a></div>
+      <SunIntroduction/>
       <p className="canopy-note"><Sprout size={15}/> Projects grow along the canopy. Follow a branch.</p>
       <div className="project-branches" id="project-branches">{canopyProjects.map((project,index)=><ProjectBranch project={project} index={index} onActive={setFocus} key={project.slug}/>)}</div>
       <div className="seedling-projects"><span>Also growing</span>{archiveProjects.map(project=><span key={project.slug}>{project.title}</span>)}<Link href="/work">Project archive →</Link></div>
@@ -125,10 +129,7 @@ export function WorldTreeHome() {
 
     <section className="world-region life-region" id="life" aria-labelledby="life-title">
       <div className="ground-boundary" aria-hidden="true"><span className="ground-shadow"/><div className="grass-blades">{Array.from({length:18},(_,index)=><i key={index}/>)}</div><div className="fern fern-left"><i/><i/><i/></div><div className="fern fern-right"><i/><i/><i/></div></div><div className="soil-texture" aria-hidden="true"><i/><i/><i/><i/><i/><i/></div>
-      <div className="region-label"><span>05</span><p>The roots</p></div>
-      <header><p className="eyebrow">Beyond code</p><h2 id="life-title">The life around<br/><em>the work.</em></h2><p>A future photo journal for places, people, memories, and the ordinary moments worth keeping.</p></header>
-      <div className="root-scrapbook">{lifeEntries.map((entry,index)=><article className={`root-photo ${entry.layout}`} key={entry.slug} style={{"--tilt":`${index%2?2.5:-2.5}deg`} as React.CSSProperties}>{entry.photos[0]?<Image src={withBasePath(entry.photos[0])} alt={entry.caption} width={900} height={700}/>:<div className="photo-placeholder"><span>Photo {String(index+1).padStart(2,"0")}</span><small>Reserved for your photograph</small></div>}<div><span>{entry.date}</span><h3>{entry.title}</h3><p>{entry.caption}</p></div></article>)}</div>
-      <Link className="text-link life-link" href="/life">Open the photo journal <ArrowUpRight size={15}/></Link>
+      <h2 id="life-title" className="sr-only">Life</h2><Link className="root-life-link" href="/life"><span>Personal archive</span><strong>Life journal</strong><ArrowUpRight size={16}/></Link>
     </section>
 
     <section className="world-region ground-region" id="contact" aria-labelledby="contact-title">
