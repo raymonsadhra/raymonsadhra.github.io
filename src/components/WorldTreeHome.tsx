@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowDown, ArrowUpRight, BookOpen, GraduationCap, MapPin, Sprout } from "lucide-react";
+import { ArrowUpRight, BookOpen, Camera, GraduationCap, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { experiences } from "@/data/experience";
 import { links, hasLink } from "@/data/links";
 import { media } from "@/data/media";
+import { rootContentGroups } from "@/data/life";
 import { projects } from "@/data/projects";
 import { experienceTreePositions, projectTreePositions, treeRegions } from "@/data/worldTree";
 import { withBasePath } from "@/data/siteEnvironment";
@@ -16,11 +17,15 @@ const causeway = projects.find((project) => project.slug === "causeway");
 const archiveProjects = projects.filter((project) => !project.featured && project.slug !== "causeway");
 
 function SkyAtmosphere() {
-  return <div className="tropical-sky" aria-hidden="true"><svg className="cloud cloud-one" viewBox="0 0 320 120"><path d="M13 94c5-27 28-42 53-38 10-32 57-41 79-14 25-36 82-22 86 19 35-8 70 9 77 33H13Z"/></svg><svg className="cloud cloud-two" viewBox="0 0 360 130"><path d="M8 106c8-29 35-44 64-37 17-45 79-53 106-17 30-27 83-16 94 23 38-10 74 4 82 31H8Z"/></svg><svg className="cloud cloud-three" viewBox="0 0 280 105"><path d="M7 89c8-24 30-34 52-29 15-36 67-40 88-10 28-20 67-6 72 27 28-5 49 2 56 12H7Z"/></svg></div>;
+  return <div className="tropical-sky" aria-hidden="true"><span className="atmospheric-glow"/><svg className="cloud cloud-one" viewBox="0 0 320 120"><path d="M13 94c5-27 28-42 53-38 10-32 57-41 79-14 25-36 82-22 86 19 35-8 70 9 77 33H13Z"/></svg><svg className="cloud cloud-two" viewBox="0 0 360 130"><path d="M8 106c8-29 35-44 64-37 17-45 79-53 106-17 30-27 83-16 94 23 38-10 74 4 82 31H8Z"/></svg><svg className="cloud cloud-three" viewBox="0 0 280 105"><path d="M7 89c8-24 30-34 52-29 15-36 67-40 88-10 28-20 67-6 72 27 28-5 49 2 56 12H7Z"/></svg></div>;
 }
 
-function SunIntroduction() {
-  return <div className="sun-introduction"><div className="sun-rays" aria-hidden="true">{Array.from({length:16},(_,index)=><i key={index} style={{"--ray":index} as React.CSSProperties}/>)}</div><div className="sun-disc"><span className="sun-texture" aria-hidden="true"/><p className="world-hello">hi, i&apos;m Raymon.</p><h1 id="projects-title">Software engineer,<br/>researcher, and <em>builder.</em></h1><p>M.S. Computer Science @ UC San Diego</p></div><p className="sky-limit">The sky&apos;s the limit.</p><a href="#project-branches">Explore the canopy <ArrowDown size={16}/></a></div>;
+function CloudIntroduction() {
+  return <header className="cloud-introduction" id="home"><div className="hero-cloud" aria-hidden="true"><i/><i/><i/><i/><i/><span/></div><div className="cloud-copy"><p className="world-hello">hi, i&apos;m Raymon.</p><h1>Software engineer,<br/>researcher, and <em>builder.</em></h1><p>M.S. Computer Science @ UC San Diego</p></div></header>;
+}
+
+function BotanicalCrown({tone="project"}:{tone?:"project"|"research"|"experience"}) {
+  return <div className={`foliage-crown ${tone}-crown`} aria-hidden="true">{Array.from({length:9},(_,leaf)=><i key={leaf}><span/></i>)}</div>;
 }
 
 function WorldTreeIllustration() {
@@ -73,7 +78,7 @@ function ProjectBranch({ project, index, onActive }: { project: (typeof projects
   const activate=()=>{setActive(true);onActive(project.slug)};const clear=()=>{setActive(false);onActive("none")};
   return <article className={`world-project ${position.side} level-${position.level} leaf-${index%4} ${active ? "active" : ""}`} onMouseEnter={activate} onMouseLeave={clear} onFocus={activate} onBlur={clear}>
     <span className="project-stem" aria-hidden="true"/>
-    <div className="foliage-crown" aria-hidden="true">{Array.from({length:9},(_,leaf)=><i key={leaf}><span/></i>)}</div>
+    <BotanicalCrown/>
     <Link className="foliage-label" href={`/work/${project.slug}`} aria-label={`Open ${project.title} case study`}><span className="leaf-kicker">{project.kicker}</span><strong>{project.title}</strong>{project.status&&<small>{project.status}</small>}<span className="leaf-action">Explore project <ArrowUpRight size={14}/></span></Link>
     <div className="project-leaf-detail"><p>{project.summary}</p><div className="world-tags">{project.stack.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div></div>
   </article>;
@@ -84,7 +89,7 @@ function TreeProgress({ active }: { active: string }) {
 }
 
 export function WorldTreeHome() {
-  const [activeRegion, setActiveRegion] = useState("projects");
+  const [activeRegion, setActiveRegion] = useState("home");
   const [focus, setFocus] = useState("none");
   useEffect(()=>{
     const sections = treeRegions.map(({id})=>document.getElementById(id)).filter(Boolean) as HTMLElement[];
@@ -99,37 +104,40 @@ export function WorldTreeHome() {
   return <div className="world-tree-home" data-focus={focus}>
     <SkyAtmosphere/><WorldTreeIllustration/><TreeProgress active={activeRegion}/>
 
-    <section className="world-region canopy-region" id="projects" aria-labelledby="projects-title">
-      <SunIntroduction/>
-      <p className="canopy-note"><Sprout size={15}/> Projects grow along the canopy. Follow a branch.</p>
-      <div className="project-branches" id="project-branches">{canopyProjects.map((project,index)=><ProjectBranch project={project} index={index} onActive={setFocus} key={project.slug}/>)}</div>
+    <section className="world-region canopy-region" aria-labelledby="projects-title">
+      <CloudIntroduction/>
+      <h2 id="projects-title" className="sr-only">Featured engineering projects</h2>
+      <div className="project-branches" id="projects">{canopyProjects.map((project,index)=><ProjectBranch project={project} index={index} onActive={setFocus} key={project.slug}/>)}</div>
       <div className="seedling-projects"><span>Also growing</span>{archiveProjects.map(project=><span key={project.slug}>{project.title}</span>)}<Link href="/work">Project archive →</Link></div>
     </section>
 
     <section className="world-region research-region" id="research" aria-labelledby="research-title" onMouseEnter={()=>setFocus("research")} onMouseLeave={()=>setFocus("none")}>
       <div className="region-label"><span>02</span><p>Upper branches</p></div>
       <div className="research-bough"><p className="eyebrow">Research</p><h2 id="research-title">Questions that<br/><em>become systems.</em></h2><div className="research-leaves">
-        <Link href="/work/minecraft-settlement-generator"><span>Procedural systems</span><h3>Terrain-Adaptive Settlements</h3><p>Custom A*, graph traversal, flood-fill, and elevation-aware roads.</p><strong>Accepted to EXAG-26 at AIIDE-26</strong></Link>
-        <Link href="/work/biomedical-ai"><span>Scientific machine learning</span><h3>Biomedical AI Research</h3><p>Graph neural networks, protein embeddings, and molecular dynamics.</p><strong>Explore the research direction</strong></Link>
+        <Link href="/work/minecraft-settlement-generator" className="research-cluster"><span className="cluster-stem" aria-hidden="true"/><BotanicalCrown tone="research"/><span className="cluster-copy"><small>Procedural Content Generation Lab</small><h3>Terrain-Adaptive Settlements</h3><p>Custom A*, graph traversal, flood-fill, and elevation-aware roads.</p><strong>Lab → connected project</strong></span></Link>
+        <Link href="/work/biomedical-ai" className="research-cluster"><span className="cluster-stem" aria-hidden="true"/><BotanicalCrown tone="research"/><span className="cluster-copy"><small>Biomedical AI Lab</small><h3>Protein Modeling</h3><p>Graph neural networks, protein embeddings, and molecular dynamics.</p><strong>Lab → connected project</strong></span></Link>
       </div><Link className="text-link" href="/research">Research notes <ArrowUpRight size={15}/></Link></div>
     </section>
 
     <section className="world-region experience-region" id="experience" aria-labelledby="experience-title">
       <div className="region-label"><span>03</span><p>Main branches</p></div>
       <header className="branch-heading"><p className="eyebrow">Experience</p><h2 id="experience-title">Built under<br/><em>real constraints.</em></h2><p>Engineering and research across infrastructure, developer tools, scientific ML, procedural generation, and products.</p></header>
-      <div className="experience-branches">{experiences.map((item,index)=>{const side=experienceTreePositions[item.org]?.side??(index%2?"right":"left");return <article key={item.org} className={`experience-branch ${side}`} onMouseEnter={()=>setFocus("experience")} onMouseLeave={()=>setFocus("none")}><span className="branch-node" aria-hidden="true"/><div className="experience-leaf-body"><span className="experience-kicker">0{index+1} · {item.date}</span><h3>{item.org}</h3><strong>{item.role}</strong><p>{item.contributions[0]}</p><div className="world-tags">{item.tech.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div>{item.org==="Tech4Good"&&causeway&&<Link className="causeway-sprout" href="/work/causeway"><i aria-hidden="true"/><span><small>Connected project</small><b>Causeway</b></span><ArrowUpRight size={15}/></Link>}</div></article>})}</div>
+      <div className="experience-branches">{experiences.map((item,index)=>{const side=experienceTreePositions[item.org]?.side??(index%2?"right":"left");const connected=item.org==="Tech4Good"?causeway:item.org==="Biomedical AI Lab"?projects.find(project=>project.slug==="biomedical-ai"):item.org==="Procedural Content Generation Lab"?projects.find(project=>project.slug==="minecraft-settlement-generator"):undefined;return <article key={item.org} className={`experience-branch ${side}`} onMouseEnter={()=>setFocus("experience")} onMouseLeave={()=>setFocus("none")}><span className="branch-node" aria-hidden="true"/><span className="experience-stem" aria-hidden="true"/><BotanicalCrown tone="experience"/><div className="experience-leaf-body"><span className="experience-kicker">0{index+1} · {item.date}</span><h3>{item.org}</h3><strong>{item.role}</strong><p>{item.contributions[0]}</p><div className="world-tags">{item.tech.slice(0,4).map(tech=><span key={tech}>{tech}</span>)}</div>{connected&&<Link className="causeway-sprout" href={`/work/${connected.slug}`}><i aria-hidden="true"/><span><small>Connected project</small><b>{connected.title}</b></span><ArrowUpRight size={15}/></Link>}</div></article>})}</div>
       <Link className="text-link experience-link" href="/experience">Full experience <ArrowUpRight size={15}/></Link>
     </section>
 
-    <section className="world-region about-region" id="about" aria-labelledby="about-title">
-      <div className="region-label"><span>04</span><p>The trunk</p></div>
-      <div className="about-canopy"><div className="portrait-knot">{media.profile.portrait?<Image src={withBasePath(media.profile.portrait)} alt="Raymon Sadhra" width={800} height={1000}/>:<div className="portrait-placeholder"><span>Portrait</span><small>Add your photograph in<br/>src/data/media.ts</small></div>}</div><article><p className="eyebrow">About me</p><h2 id="about-title">The person inside<br/><em>the systems.</em></h2><p>I&apos;m a software engineer and computer science graduate student drawn to problems that sit between disciplines. I like understanding the terrain, testing an idea, building the infrastructure, and shaping the experience around it.</p><p>That curiosity has taken me through backend systems, language tooling, applied machine learning, computational biology, procedural generation, and mobile products.</p><Link className="text-link" href="/about">More about me <ArrowUpRight size={15}/></Link></article></div>
-      <div className="education-rings"><div><GraduationCap/><span>Graduate study</span><strong>UC San Diego</strong><p>M.S. Computer Science</p></div><div><BookOpen/><span>Foundation</span><strong>UC Santa Cruz</strong><p>B.S. Computer Science</p></div><div><MapPin/><span>Home ground</span><strong>California</strong><p>Building across disciplines</p></div></div>
+    <section className="world-region base-region" id="base" aria-labelledby="base-title">
+      <div className="region-label"><span>04</span><p>Base</p></div><h2 id="base-title" className="sr-only">Education and home ground</h2>
+      <div className="education-bushes"><article className="education-bush"><BotanicalCrown/><div><GraduationCap/><span>Graduate study</span><strong>UC San Diego</strong><p>M.S. Computer Science</p></div></article><article className="education-bush california"><BotanicalCrown/><div><MapPin/><span>Home ground</span><strong>California</strong><p>Building across disciplines</p></div></article><article className="education-bush"><BotanicalCrown/><div><BookOpen/><span>Foundation</span><strong>UC Santa Cruz</strong><p>B.S. Computer Science</p></div></article></div>
     </section>
 
-    <section className="world-region life-region" id="life" aria-labelledby="life-title">
+    <section className="world-region about-region underground-region" id="about" aria-labelledby="about-title">
       <div className="ground-boundary" aria-hidden="true"><span className="ground-shadow"/><div className="grass-blades">{Array.from({length:18},(_,index)=><i key={index}/>)}</div><div className="fern fern-left"><i/><i/><i/></div><div className="fern fern-right"><i/><i/><i/></div></div><div className="soil-texture" aria-hidden="true"><i/><i/><i/><i/><i/><i/></div>
-      <h2 id="life-title" className="sr-only">Life</h2><Link className="root-life-link" href="/life"><span>Personal archive</span><strong>Life journal</strong><ArrowUpRight size={16}/></Link>
+      <div className="region-label"><span>05</span><p>Roots</p></div><div className="about-roots"><div className="portrait-knot">{media.profile.portrait?<Image src={withBasePath(media.profile.portrait)} alt="Raymon Sadhra" width={800} height={1000}/>:<div className="portrait-placeholder"><Camera size={24}/><span>Portrait coming soon</span><small>A reserved frame for a real photograph.</small></div>}</div><article><p className="eyebrow">About me</p><h2 id="about-title">The person inside<br/><em>the systems.</em></h2><p>I&apos;m a software engineer and computer science graduate student drawn to problems that sit between disciplines. I like understanding the terrain, testing an idea, building the infrastructure, and shaping the experience around it.</p><p>That curiosity has taken me through backend systems, language tooling, applied machine learning, computational biology, procedural generation, and mobile products.</p><Link className="text-link" href="/about">More about me <ArrowUpRight size={15}/></Link></article></div>
+    </section>
+
+    <section className="world-region life-region underground-region" id="life" aria-labelledby="life-title">
+      <div className="soil-texture" aria-hidden="true"><i/><i/><i/><i/><i/><i/></div><div className="region-label"><span>06</span><p>Personal roots</p></div><header><p className="eyebrow">Life below the surface</p><h2 id="life-title">Room for the life<br/><em>around the work.</em></h2><p>These root clusters are intentionally reserved for real photographs and memories I choose to share.</p></header><div className="personal-root-grid">{rootContentGroups.map((group,index)=><article className={`personal-root root-${index+1}`} key={group.id}><span className="root-connector" aria-hidden="true"/><div className="root-media-placeholder"><Camera size={22}/><small>{group.category}</small></div><h3>{group.label}</h3><p>{group.prompt}</p></article>)}</div><Link className="root-life-link" href="/life"><span>Personal archive</span><strong>Open the Life journal</strong><ArrowUpRight size={16}/></Link>
     </section>
 
     <section className="world-region ground-region" id="contact" aria-labelledby="contact-title">

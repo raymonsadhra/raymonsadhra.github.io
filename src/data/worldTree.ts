@@ -20,10 +20,12 @@ export const experienceTreePositions: Record<string, { side: "left" | "right" }>
 };
 
 export const treeRegions = [
+  { id: "home", label: "Sky" },
   { id: "projects", label: "Canopy" },
   { id: "research", label: "Research" },
   { id: "experience", label: "Branches" },
-  { id: "about", label: "Trunk" },
-  { id: "life", label: "Roots" },
+  { id: "base", label: "Base" },
+  { id: "about", label: "Roots" },
+  { id: "life", label: "Life" },
   { id: "contact", label: "Ground" },
 ] as const;

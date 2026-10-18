@@ -1,5 +1,5 @@
 export const treeAnchors = {
-  home: "/#projects",
+  home: "/#home",
   projects: "/#projects",
   experience: "/#experience",
   research: "/#research",
