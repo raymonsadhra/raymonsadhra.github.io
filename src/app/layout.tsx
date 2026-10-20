@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Raymon Sadhra | Software Engineer",
     description: "Backend systems, AI/ML applications, developer tooling, and research-driven engineering.",
     type: "website",
-    siteName: "Raymon Sadhra — Built Worlds",
+    siteName: "Raymon Sadhra — Software Engineer",
     images: [{ url: `${siteUrl}/opengraph-image`, width: 1200, height: 630, alt: "Raymon Sadhra — Software Engineer" }],
   },
   twitter: { card: "summary_large_image", title: "Raymon Sadhra | Software Engineer", description: "Backend systems, AI/ML, developer tooling, and research-driven engineering.", images: [`${siteUrl}/opengraph-image`] },

@@ -1,9 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { navItems, projectBackHref, treeAnchors } from "./site";
-import { treeRegions } from "./worldTree";
+import { navItems, projectBackHref, sectionAnchors, workBackHref } from "./site";
 
-describe("World Tree navigation", () => {
-  it("returns every case study to the project canopy", () => {
+describe("Portfolio navigation", () => {
+  it("returns every project case study to the project grid", () => {
     expect(projectBackHref).toBe("/#projects");
   });
 
@@ -12,15 +11,16 @@ describe("World Tree navigation", () => {
   });
 
   it("keeps every homepage navigation target valid", () => {
-    expect(Object.values(treeAnchors)).toEqual([
-      "/#home", "/#projects", "/#experience", "/#research", "/#about", "/#life", "/#contact",
+    expect(Object.values(sectionAnchors)).toEqual([
+      "/#home", "/#work", "/#projects", "/#experience", "/#about", "/#contact",
     ]);
   });
 
-  it("tracks the V7 landscape from sky to ground", () => {
-    expect(treeRegions.map(({ id, label }) => `${id}:${label}`)).toEqual([
-      "home:Sky", "projects:Canopy", "research:Research", "experience:Branches",
-      "base:Base", "about:Roots", "life:Life", "contact:Ground",
-    ]);
+  it("returns experience case studies to featured work", () => {
+    expect(workBackHref).toBe("/#work");
+  });
+
+  it("uses the V9 professional navigation order", () => {
+    expect(navItems.map(([label]) => label)).toEqual(["Home", "Work", "Projects", "Experience", "About", "Contact"]);
   });
 });

@@ -1,1 +1,0 @@
-export function BotanicalDivider({label}:{label?:string}) { return <div className="botanical-divider" aria-hidden="true"><span/><svg viewBox="0 0 90 28"><path d="M2 24 C24 24 25 5 46 14 C62 21 66 6 88 4"/><path d="M32 16 C27 4 15 3 10 10 C17 19 25 21 32 16Z"/><path d="M62 13 C67 1 80 0 85 7 C79 16 69 18 62 13Z"/></svg><em>{label}</em><span/></div> }
