@@ -1,18 +1,17 @@
 export const sectionAnchors = {
-  home: "/#home",
+  home: "/",
   work: "/#work",
-  projects: "/#projects",
-  experience: "/#experience",
-  about: "/#about",
-  contact: "/#contact",
+  projects: "/#work",
+  experience: "/experience",
+  about: "/about",
+  contact: "/contact",
 } as const;
 
-export const projectBackHref = sectionAnchors.projects;
+export const projectBackHref = sectionAnchors.work;
 export const workBackHref = sectionAnchors.work;
 
 export const navItems = [
-  ["Home", sectionAnchors.home], ["Work", sectionAnchors.work], ["Projects", sectionAnchors.projects],
-  ["Experience", sectionAnchors.experience], ["About", sectionAnchors.about], ["Contact", sectionAnchors.contact],
+  ["Home", sectionAnchors.home], ["About", sectionAnchors.about], ["Work", sectionAnchors.work], ["Contact", sectionAnchors.contact],
 ] as const;
 
 export const nowItems = [
