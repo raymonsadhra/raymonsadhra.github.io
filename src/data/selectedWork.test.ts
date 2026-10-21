@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getWorkMarker, selectedWork, visibleSelectedWork } from "./selectedWork";
 
-describe("V14 selected work", () => {
+describe("V16 featured work", () => {
   it("keeps the six requested entries visible and ordered", () => {
     expect(visibleSelectedWork.map((item) => item.title)).toEqual([
       "Capital One — SLA Sentry",
@@ -42,8 +42,17 @@ describe("V14 selected work", () => {
       "Hackathon Project",
       "Research Project",
       "Software Engineer Internship",
-      "Research Project",
+      "Machine Learning Research",
     ]);
+  });
+
+  it("uses the approved Concentrical and Biomedical AI summaries", () => {
+    expect(selectedWork.find((item) => item.title === "Concentrical")?.description).toBe(
+      "Repository analysis and architecture tooling to help developers onboard onto complex codebases.",
+    );
+    expect(selectedWork.find((item) => item.title === "Biomedical AI")?.description).toBe(
+      "Graph neural network research for modeling protein–ligand interactions using molecular structures and simulation data.",
+    );
   });
 
   it("uses the approved Ghost Runner description and keeps its recognition", () => {

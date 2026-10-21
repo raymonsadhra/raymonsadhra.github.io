@@ -13,6 +13,7 @@ const research = experiences.filter((item) => item.role.includes("Research") || 
 const professional = experiences.filter((item) => !research.includes(item));
 const experienceRoutes: Record<string, string> = {
   "Capital One": "/work/capital-one",
+  "Concentrical": "/experience",
   "Biomedical AI Lab": "/work/biomedical-ai",
   "Procedural Content Generation Lab": "/work/minecraft-settlement-generator",
 };

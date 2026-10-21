@@ -9,3 +9,4 @@ out/
 *.tsbuildinfo
 coverage/
 .vercel/
+headshot.jpg

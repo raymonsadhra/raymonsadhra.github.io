@@ -31,7 +31,7 @@ export function PokerHome() {
 
       <section className="selected-work" id="work" aria-labelledby="selected-work-title">
         <header className="selected-work-heading">
-          <div><p>Portfolio · V15</p><h2 id="selected-work-title">Selected Work</h2></div>
+          <div><p>Portfolio · V16</p><h2 id="selected-work-title">Featured Work</h2></div>
           <span>{String(visibleSelectedWork.length).padStart(2, "0")} studies</span>
         </header>
         <div className="selected-work-list">

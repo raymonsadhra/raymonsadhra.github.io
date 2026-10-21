@@ -22,4 +22,11 @@ describe("project content", () => {
     expect(terrain?.result).toContain("±1 elevation steps");
     expect(terrain?.architecture).toHaveLength(6);
   });
+  it("uses the approved Biomedical AI framing without unsupported claims", () => {
+    const biomedical = getProject("biomedical-ai");
+    expect(biomedical?.title).toBe("Biomedical AI — Protein–Ligand Modeling");
+    expect(biomedical?.role).toBe("Machine Learning Research Assistant | Biomedical AI Lab");
+    expect(biomedical?.summary).toBe("Learning molecular interactions through graph-based machine learning.");
+    expect(biomedical?.result).not.toMatch(/clinical|accuracy|percent|%/i);
+  });
 });
