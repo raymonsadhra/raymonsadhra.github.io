@@ -66,6 +66,19 @@ The project is compatible with GitHub Pages because `next.config.ts` uses `outpu
 
 The workflow at `.github/workflows/deploy.yml` runs on every push to `main`. It installs the locked dependencies, runs TypeScript, ESLint, tests, and the production build, then publishes `out/` with the official GitHub Pages actions. It automatically uses no base path for a `<username>.github.io` user site and uses `/<repository>` for a project site. Canonical metadata, sitemap URLs, Next.js routes, and public media paths receive the corresponding deployment URL at build time.
 
+### Umami Cloud analytics
+
+Analytics is optional and disabled unless `NEXT_PUBLIC_UMAMI_WEBSITE_ID` is set during a production build. Local `npm run dev` visits are never tracked, and the tracker is restricted to `raymonsadhra.github.io`. It also respects supported Do Not Track signals and excludes URL query strings and hashes.
+
+1. Sign in to [Umami Cloud](https://cloud.umami.is/), open **Websites**, and add a website with domain `raymonsadhra.github.io`.
+2. Copy the Website ID from its tracking code. This public identifier is not an account password or administrative API key.
+3. In the GitHub repository, open **Settings → Secrets and variables → Actions → Variables** and create `NEXT_PUBLIC_UMAMI_WEBSITE_ID` with that value.
+4. Run the Pages workflow again, or push a new commit to `main`.
+
+Umami automatically records initial pageviews and client-side Next.js navigation. Declarative event attributes record `featured_work_click`, `resume_click`, `email_click`, `linkedin_click`, `github_click`, and `project_resource_click` without storing email addresses or other user-entered data. The project/resource properties contain only stable, nonpersonal identifiers.
+
+In the Umami website dashboard, use the overview for visitors and pageviews, **Pages** for popular case studies, **Locations** for approximate country/region/city, **Referrers** for traffic sources, and **Events** for portfolio engagement. Location values are approximate and do not identify where a specific visitor lives or works. Umami cannot identify individual recruiters or Google employees.
+
 After the repository exists, open **Settings → Pages → Build and deployment** and select **GitHub Actions**. GitHub Pages is available for public repositories on GitHub Free; private-repository Pages availability depends on the account or organization plan.
 
 ### Publish an update

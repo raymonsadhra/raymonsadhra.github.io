@@ -4,6 +4,7 @@ import { projects, getProject } from "@/data/projects";
 import { links } from "@/data/links";
 import { ProjectVisual } from "@/components/ProjectVisual";
 import { withBasePath } from "@/data/siteEnvironment";
+import { analyticsEvents } from "@/data/analytics";
 import { PokerChip } from "@/components/PokerChip";
 import { getWorkMarker } from "@/data/selectedWork";
 import { CaseStudyBackLink } from "@/components/CaseStudyBackLink";
@@ -70,5 +71,5 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
   {isTech4Good&&<CaseStudyDecisions title="Keeping full-stack behavior predictable." decisions={tech4GoodDecisions}/>}
   {isRag?<RagSystemMap/>:isGhost?<GhostRunnerArchitecture/>:isTerrain?<TerrainSystemMap/>:isBiomedical?<PipelineSystemMap summary="The research workflow prepares molecular and simulation data, combines structural and learned features, trains a graph neural network, and analyzes outputs against simulation-derived references." stages={biomedicalStages}/>:isTech4Good?<PipelineSystemMap summary="The application flow connects a reusable Angular interface to reactive state and Firebase-backed services. Google Cloud Functions support server-side paths where needed rather than sitting between every client interaction and Firebase." stages={tech4GoodStages} branch={{title:"Google Cloud Functions",detail:"Server-side functionality for the application paths that require it."}}/>:<section className="architecture"><p className="eyebrow">System map</p><h2>From input to outcome.</h2><div>{project.architecture.map((step,i)=><div key={step}><span>0{i+1}</span><strong>{step}</strong>{i<project.architecture.length-1&&<ExternalLink size={14}/>}</div>)}</div></section>}
   {project.needsInfo&&<aside className="needs-info"><strong>Case study in progress</strong><p>This page uses verified public context only. Add the following before treating it as a complete account of Raymon&apos;s contribution:</p><ul>{project.needsInfo.map(item=><li key={item}>{item}</li>)}</ul></aside>}
-  {projectLinks&&Object.values(projectLinks).some(Boolean)&&<div className="case-links">{Object.entries(projectLinks).filter(([,url])=>url).map(([label,url])=><a className="button secondary" key={label} href={withBasePath(url!)}>{label} <ExternalLink size={15}/></a>)}</div>}
+  {projectLinks&&Object.values(projectLinks).some(Boolean)&&<div className="case-links">{Object.entries(projectLinks).filter(([,url])=>url).map(([label,url])=><a className="button secondary" key={label} href={withBasePath(url!)} data-umami-event={analyticsEvents.projectResourceClick} data-umami-event-project={slug} data-umami-event-resource={label}>{label} <ExternalLink size={15}/></a>)}</div>}
   </article></>}

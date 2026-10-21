@@ -6,6 +6,7 @@ import { withBasePath } from "@/data/siteEnvironment";
 import { media } from "@/data/media";
 import { PokerChip } from "./PokerChip";
 import { AnimatedPortraitChip } from "./AnimatedPortraitChip";
+import { analyticsEvents, featuredProjectIdByHref } from "@/data/analytics";
 
 const profileLinks = [
   { label: "LinkedIn", value: links.linkedin, icon: Linkedin },
@@ -23,8 +24,8 @@ export function PokerHome() {
         <div className="profile-education"><span>M.S. CS — UCSD</span><span>B.S. CS — UCSC</span></div>
         <p className="profile-intro">I&apos;m a software engineer and M.S. Computer Science student at UC San Diego. I&apos;m most at home when I can work on creating long lasting solutions to complex problems</p>
         <div className="profile-links">
-          {hasLink(links.email)&&<a href={`mailto:${links.email}`}><Mail size={15} />Contact</a>}
-          {profileLinks.map(({ label, value, icon: Icon }) => hasLink(value) && <a key={label} href={withBasePath(value)} target="_blank" rel="noopener noreferrer"><Icon size={15} />{label}</a>)}
+          {hasLink(links.email)&&<a href={`mailto:${links.email}`} data-umami-event={analyticsEvents.emailClick}><Mail size={15} />Contact</a>}
+          {profileLinks.map(({ label, value, icon: Icon }) => hasLink(value) && <a key={label} href={withBasePath(value)} target="_blank" rel="noopener noreferrer" data-umami-event={label === "LinkedIn" ? analyticsEvents.linkedinClick : analyticsEvents.githubClick}><Icon size={15} />{label}</a>)}
         </div>
       </aside>
 
@@ -33,7 +34,7 @@ export function PokerHome() {
           <h2 id="selected-work-title">Featured Work</h2>
         </header>
         <div className="selected-work-list">
-          {visibleSelectedWork.map((item, index) => <Link className="selected-work-row" href={item.href} key={item.title}>
+          {visibleSelectedWork.map((item, index) => <Link className="selected-work-row" href={item.href} key={item.title} data-umami-event={analyticsEvents.featuredWorkClick} data-umami-event-project={featuredProjectIdByHref[item.href]}>
             <div className="work-marker"><PokerChip label={getWorkMarker(item.title, item.marker)} tone={index % 3 === 0 ? "burgundy" : index % 3 === 1 ? "forest" : "gold"} size="sm" /></div>
             <div className="work-copy">
               {item.recognition&&<p className="work-recognition">{item.recognition}</p>}<p className="work-type">{item.context}</p><h3>{item.title}</h3><span>{item.description}</span>

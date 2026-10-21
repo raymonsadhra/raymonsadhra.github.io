@@ -225,4 +225,5 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
 .about-v18-contact nav{display:flex;flex-wrap:wrap;gap:.65rem 1.6rem;padding-top:1.4rem;border-top:1px solid rgba(20,61,50,.18)}
 .about-v18-contact a{display:inline-flex;align-items:center;gap:.45rem;padding:.35rem 0;border-bottom:1px solid var(--poker-gold);color:var(--poker-felt);font-size:.78rem;font-weight:800;transition:color .2s,border-color .2s}
 .about-v18-contact a:hover{color:var(--poker-burgundy);border-color:var(--poker-burgundy)}
+.analytics-disclosure{max-width:42rem;margin-top:1.25rem;color:var(--muted);font-size:.78rem;line-height:1.55}
 @media(max-width:700px){.about-v18{padding-top:3rem}.about-v18-intro h1{font-size:clamp(3.1rem,15vw,5rem)}.about-v18-section{grid-template-columns:1fr;gap:1.5rem;padding-block:3rem}.education-entries{grid-template-columns:1fr}.education-entries article,.education-entries article+article{padding:1.35rem 0;border-left:0}.about-v18-contact nav{gap:.6rem 1.2rem}}
