@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getWorkMarker, selectedWork, visibleSelectedWork } from "./selectedWork";
 
-describe("V12 selected work", () => {
+describe("V13 selected work", () => {
   it("keeps the six requested entries visible and ordered", () => {
     expect(visibleSelectedWork.map((item) => item.title)).toEqual([
       "Capital One — SLA Sentry",
@@ -29,5 +29,9 @@ describe("V12 selected work", () => {
     expect(capitalOne?.title).toBe("Capital One — SLA Sentry");
     expect(capitalOne?.description).toBe("Configurable monitoring for enterprise correspondence systems.");
     expect(capitalOne?.tags).toEqual(["Python", "Databricks", "Reliability"]);
+  });
+
+  it("uses the approved RAG Motion homepage description", () => {
+    expect(selectedWork.find((item) => item.title === "RAG Motion")?.description).toBe("End-to-end multimodal video RAG system for semantic search and grounded Q&A.");
   });
 });

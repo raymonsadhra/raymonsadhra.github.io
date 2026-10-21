@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { navItems, projectBackHref, sectionAnchors, workBackHref } from "./site";
+import { getCaseStudyReturn, navItems, projectBackHref, sectionAnchors, workBackHref } from "./site";
 
 describe("Portfolio navigation", () => {
   it("returns every project case study to all work", () => {
@@ -22,5 +22,12 @@ describe("Portfolio navigation", () => {
 
   it("uses exactly the V11 navigation order", () => {
     expect(navItems.map(([label]) => label)).toEqual(["Home", "All Work", "About"]);
+  });
+
+  it("uses only validated case-study return destinations", () => {
+    expect(getCaseStudyReturn("home")).toEqual({ href: "/#work", label: "Back to Home" });
+    expect(getCaseStudyReturn("work")).toEqual({ href: "/work/", label: "Back to All Work" });
+    expect(getCaseStudyReturn("https://malicious.example")).toEqual({ href: "/#work", label: "Back to Home" });
+    expect(getCaseStudyReturn(null)).toEqual({ href: "/#work", label: "Back to Home" });
   });
 });

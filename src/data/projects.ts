@@ -14,8 +14,8 @@ export const projects: Project[] = [
     categories: ["AI & ML", "Systems"], stack: ["Python", "FastAPI", "OpenAI", "Chroma", "Docker", "FFmpeg"], year: "2026", tone: "cyan", featured: true,
     problem: "Video knowledge is scattered across what is said, shown, and written on screen. Useful retrieval needs those signals to agree in time.",
     role: "Designed and implemented the multimodal indexing and retrieval pipeline.",
-    architecture: ["Video + audio ingestion", "Transcript · OCR · captions · frames", "Timeline-aligned retrieval windows", "Vector search + grounded response"],
-    decisions: ["Aligned every modality to shared timestamp windows", "Persisted checkpoints so long indexing jobs can resume", "Returned evidence windows rather than context-free text fragments"],
+    architecture: ["Video input", "Media processing", "Timestamp-aligned chunking", "Embedding and vector indexing", "Semantic retrieval", "Grounded question answering"],
+    decisions: ["Timeline-aligned multimodal chunking", "Semantic vector retrieval", "Persistent indexing checkpoints"],
     result: "A resumable, inspectable video RAG system with timestamped evidence.", media: ["Evidence timeline", "Indexing pipeline", "Grounded answer view"],
   },
   {

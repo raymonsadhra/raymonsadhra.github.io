@@ -1,7 +1,5 @@
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { workBackHref } from "@/data/site";
 import { PokerChip } from "@/components/PokerChip";
+import { CaseStudyBackLink } from "@/components/CaseStudyBackLink";
 
 export const metadata = {
   title: "Capital One — SLA Sentry",
@@ -28,7 +26,7 @@ function SectionMarker({ number, label }: { number: string; label: string }) {
 
 export default function CapitalOneCaseStudy() {
   return <article className="case case-study-page capital-one-case capital-sentry-case shell">
-    <Link className="back" href={workBackHref}><ArrowLeft size={16}/> Back to All Work</Link>
+    <CaseStudyBackLink/>
     <header>
       <div className="case-chip-row"><PokerChip label="CO" tone="forest"/><p className="eyebrow">SLA Sentry · Public-safe engineering case study</p></div>
       <h1>Capital One — SLA Sentry</h1>
@@ -51,6 +49,6 @@ export default function CapitalOneCaseStudy() {
       <div><h2>Reliability through deliberate boundaries.</h2><div className="capital-decision-grid">{decisions.map(([title,copy])=><article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div>
     </section>
 
-    <Link className="back capital-bottom-back" href={workBackHref}><ArrowLeft size={16}/> Back to All Work</Link>
+    <CaseStudyBackLink className="capital-bottom-back"/>
   </article>;
 }
