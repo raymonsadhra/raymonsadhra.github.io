@@ -1,8 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { analyticsEvents, featuredProjectIdByHref, getUmamiWebsiteId, isUmamiAnalyticsEnabled, projectResourceBySlug } from "./analytics";
 import { visibleSelectedWork } from "./selectedWork";
 
 describe("analytics configuration", () => {
+  afterEach(() => vi.unstubAllEnvs());
+
   it("maps every featured work item to a safe analytics identifier", () => {
     expect(visibleSelectedWork.map((item) => featuredProjectIdByHref[item.href])).toEqual([
       "capital-one",
@@ -37,6 +39,7 @@ describe("analytics configuration", () => {
   });
 
   it("keeps analytics disabled when no Website ID is configured", () => {
+    vi.stubEnv("NEXT_PUBLIC_UMAMI_WEBSITE_ID", "  ");
     expect(getUmamiWebsiteId()).toBeNull();
     expect(isUmamiAnalyticsEnabled()).toBe(false);
   });
