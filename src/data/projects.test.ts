@@ -29,4 +29,12 @@ describe("project content", () => {
     expect(biomedical?.summary).toBe("Learning molecular interactions through graph-based machine learning.");
     expect(biomedical?.result).not.toMatch(/clinical|accuracy|percent|%/i);
   });
+  it("models Tech4Good as a verified full-stack case study", () => {
+    const tech4Good = getProject("tech4good");
+    expect(tech4Good?.title).toBe("Tech4Good — Full-Stack Engineering");
+    expect(tech4Good?.role).toBe("Full-Stack Developer | Tech4Good Lab");
+    expect(tech4Good?.stack).toEqual(["Angular", "TypeScript", "NgRx", "RxJS", "Firebase", "Google Cloud Functions"]);
+    expect(tech4Good?.result).toContain("550+ users");
+    expect(tech4Good?.result).toContain("Causeway");
+  });
 });

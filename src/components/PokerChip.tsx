@@ -6,5 +6,5 @@ type PokerChipProps = {
 };
 
 export function PokerChip({ label, tone = "forest", size = "md", className = "" }: PokerChipProps) {
-  return <span className={`poker-chip chip-${tone} chip-${size} ${className}`} aria-hidden="true"><i/><b>{label}</b></span>;
+  return <span className={`poker-chip chip-${tone} chip-${size} ${label.length > 2 ? "chip-long-label" : ""} ${className}`} aria-hidden="true"><i/><b>{label}</b></span>;
 }

@@ -9,4 +9,5 @@ out/
 *.tsbuildinfo
 coverage/
 .vercel/
-headshot.jpg
+/headshot.jpg
+/tech4good-port.png

@@ -1,14 +1,15 @@
 import { describe, expect, it } from "vitest";
 import { getWorkMarker, selectedWork, visibleSelectedWork } from "./selectedWork";
 
-describe("V16 featured work", () => {
-  it("keeps the six requested entries visible and ordered", () => {
+describe("V17 featured work", () => {
+  it("keeps the seven requested entries visible and ordered", () => {
     expect(visibleSelectedWork.map((item) => item.title)).toEqual([
       "Capital One — SLA Sentry",
       "RAG Motion",
-      "Ghost Runner",
       "Terrain-Adaptive Settlements",
+      "Ghost Runner",
       "Concentrical",
+      "Tech4Good",
       "Biomedical AI",
     ]);
   });
@@ -18,7 +19,7 @@ describe("V16 featured work", () => {
   });
 
   it("derives meaningful title initials and supports overrides", () => {
-    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "RM", "GR", "TS", "C", "BA"]);
+    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "RM", "TS", "GR", "C", "T4G", "BA"]);
     expect(getWorkMarker("Protein Modeling")).toBe("PM");
     expect(getWorkMarker("Causeway")).toBe("C");
     expect(getWorkMarker("Ambiguous Title", "ATX")).toBe("ATX");
@@ -39,11 +40,18 @@ describe("V16 featured work", () => {
     expect(visibleSelectedWork.map((item) => item.context)).toEqual([
       "Software Engineer Internship",
       "Personal Project",
-      "Hackathon Project",
       "Research Project",
+      "Hackathon Project",
       "Software Engineer Internship",
+      "Full-Stack Development",
       "Machine Learning Research",
     ]);
+  });
+
+  it("uses the approved Tech4Good copy and dedicated route", () => {
+    const tech4Good = selectedWork.find((item) => item.title === "Tech4Good");
+    expect(tech4Good?.href).toBe("/work/tech4good");
+    expect(tech4Good?.description).toBe("Built cloud-backed applications and full-stack features supporting mission-driven products and real users.");
   });
 
   it("uses the approved Concentrical and Biomedical AI summaries", () => {

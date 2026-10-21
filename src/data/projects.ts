@@ -46,6 +46,17 @@ export const projects: Project[] = [
     result: "A graph-based scientific machine-learning workflow for studying protein–ligand interactions from molecular structures and simulation-derived signals.", media: ["Molecular graph", "Training pipeline", "Research plot"],
   },
   {
+    slug: "tech4good", title: "Tech4Good — Full-Stack Engineering", kicker: "Full-stack development",
+    summary: "Building reliable, cloud-backed applications for mission-driven products.",
+    categories: ["Web & Mobile"], stack: ["Angular", "TypeScript", "NgRx", "RxJS", "Firebase", "Google Cloud Functions"], year: "Tech4Good Lab", tone: "blue", featured: true,
+    problem: "User-facing applications need responsive interfaces, predictable state, and dependable data flows while coordinating asynchronous events and backend integrations.",
+    role: "Full-Stack Developer | Tech4Good Lab",
+    architecture: ["Angular frontend", "NgRx / RxJS application state", "Firebase data services", "Google Cloud Functions for server-side paths", "Application data and backend services"],
+    decisions: ["Reactive frontend state management", "Cloud-backed data integration", "Maintainable component architecture"],
+    result: "Contributed full-stack features to Tech4Good projects, including Causeway, within a broader platform serving 550+ users.",
+    media: ["Tech4Good project visual", "Full-stack system map", "Causeway association"],
+  },
+  {
     slug: "causeway", title: "Causeway", kicker: "UCSC Tech4Good Lab",
     summary: "A role-based collaborative learning platform designed around contributing to real-world projects through focused, progressively connected work.",
     categories: ["Web & Mobile", "Research"], stack: ["TypeScript", "Micro-role hierarchies", "Collaborative workflows"], year: "Tech4Good", tone: "lime", featured: false,

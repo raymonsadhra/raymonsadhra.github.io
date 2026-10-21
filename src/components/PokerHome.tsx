@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { hasLink, links } from "@/data/links";
 import { getWorkMarker, visibleSelectedWork } from "@/data/selectedWork";
 import { withBasePath } from "@/data/siteEnvironment";
@@ -31,11 +31,10 @@ export function PokerHome() {
 
       <section className="selected-work" id="work" aria-labelledby="selected-work-title">
         <header className="selected-work-heading">
-          <div><p>Portfolio · V16</p><h2 id="selected-work-title">Featured Work</h2></div>
-          <span>{String(visibleSelectedWork.length).padStart(2, "0")} studies</span>
+          <h2 id="selected-work-title">Featured Work</h2>
         </header>
         <div className="selected-work-list">
-          {visibleSelectedWork.map((item, index) => <Link className="selected-work-row" href={item.href.startsWith("/work/") ? `${item.href}?from=home` : item.href} key={item.title}>
+          {visibleSelectedWork.map((item, index) => <Link className="selected-work-row" href={item.href} key={item.title}>
             <div className="work-marker"><PokerChip label={getWorkMarker(item.title, item.marker)} tone={index % 3 === 0 ? "burgundy" : index % 3 === 1 ? "forest" : "gold"} size="sm" /></div>
             <div className="work-copy">
               {item.recognition&&<p className="work-recognition">{item.recognition}</p>}<p className="work-type">{item.context}</p><h3>{item.title}</h3><span>{item.description}</span>
@@ -43,7 +42,6 @@ export function PokerHome() {
             <ArrowUpRight className="work-arrow" size={19} aria-hidden="true" />
           </Link>)}
         </div>
-        <Link className="work-archive-link" href="/work">View more work <ArrowRight size={16} /></Link>
       </section>
     </div>
 

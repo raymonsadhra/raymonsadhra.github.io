@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { CommandPalette } from "@/components/CommandPalette";
 import { siteUrl } from "@/data/siteEnvironment";
 
 export const metadata: Metadata = {
@@ -20,4 +18,4 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Raymon Sadhra | Software Engineer", description: "Backend systems, AI/ML, developer tooling, and research-driven engineering.", images: [`${siteUrl}/opengraph-image`] },
 };
 
-export default function RootLayout({children}:{children:React.ReactNode}) { return <html lang="en" suppressHydrationWarning><body><ThemeProvider><a className="skip-link" href="#main">Skip to content</a><Nav/><main id="main">{children}</main><Footer/><CommandPalette/></ThemeProvider></body></html> }
+export default function RootLayout({children}:{children:React.ReactNode}) { return <html lang="en"><body><a className="skip-link" href="#main">Skip to content</a><Nav/><main id="main">{children}</main><Footer/></body></html> }
