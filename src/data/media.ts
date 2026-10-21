@@ -3,7 +3,11 @@
  * Empty arrays deliberately render designed placeholders instead of broken images.
  */
 export const media = {
-  profile: { portrait: null as string | null, candid: [] as string[] },
+  profile: {
+    portrait: null as string | null,
+    portraitPosition: "50% 42%",
+    candid: [] as string[],
+  },
   projects: {
     "rag-motion": { cover: null, gallery: [], video: null },
     "ghost-runner": { cover: null, gallery: [], video: null },

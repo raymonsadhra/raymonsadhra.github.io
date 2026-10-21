@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { hasLink, links } from "@/data/links";
-import { visibleSelectedWork } from "@/data/selectedWork";
+import { getWorkMarker, visibleSelectedWork } from "@/data/selectedWork";
 import { withBasePath } from "@/data/siteEnvironment";
+import { media } from "@/data/media";
 import { PokerChip } from "./PokerChip";
+import { AnimatedPortraitChip } from "./AnimatedPortraitChip";
 
 const profileLinks = [
   { label: "GitHub", value: links.github, icon: Github },
@@ -15,11 +17,7 @@ export function PokerHome() {
   return <div className="minimal-home" id="home">
     <div className="shell profile-work-layout">
       <aside className="profile-sidebar" aria-labelledby="profile-name">
-        <div className="portrait-chip" aria-label="Raymon Sadhra portrait placeholder">
-          <span className="portrait-chip-edge" aria-hidden="true" />
-          <strong>RS</strong>
-          <small>Photo coming soon</small>
-        </div>
+        <AnimatedPortraitChip portrait={media.profile.portrait} objectPosition={media.profile.portraitPosition} />
         <p className="profile-eyebrow">Software engineer · California</p>
         <h1 id="profile-name">Raymon Sadhra</h1>
         <h2>Software Engineer &amp; Computer Science Graduate Student</h2>
@@ -28,17 +26,18 @@ export function PokerHome() {
         <div className="profile-links">
           {profileLinks.map(({ label, value, icon: Icon }) => hasLink(value) && <a key={label} href={withBasePath(value)}><Icon size={15} />{label}</a>)}
           {hasLink(links.resume) && <a href={withBasePath(links.resume)}><FileText size={15} />Résumé</a>}
+          <Link href="/about#contact"><Mail size={15} />Contact</Link>
         </div>
       </aside>
 
       <section className="selected-work" id="work" aria-labelledby="selected-work-title">
         <header className="selected-work-heading">
-          <div><p>Portfolio · V10</p><h2 id="selected-work-title">Selected Work</h2></div>
+          <div><p>Portfolio · V11</p><h2 id="selected-work-title">Selected Work</h2></div>
           <span>{String(visibleSelectedWork.length).padStart(2, "0")} studies</span>
         </header>
         <div className="selected-work-list">
           {visibleSelectedWork.map((item, index) => <Link className="selected-work-row" href={item.href} key={item.title}>
-            <div className="work-marker"><PokerChip label={item.marker} tone={index % 3 === 0 ? "burgundy" : index % 3 === 1 ? "forest" : "gold"} size="sm" /></div>
+            <div className="work-marker"><PokerChip label={getWorkMarker(item.title, item.marker)} tone={index % 3 === 0 ? "burgundy" : index % 3 === 1 ? "forest" : "gold"} size="sm" /></div>
             <div className="work-copy">
               <p>{item.context}</p><h3>{item.title}</h3><span>{item.description}</span>
               <div>{item.tags.map((tag) => <small key={tag}>{tag}</small>)}</div>
@@ -50,12 +49,5 @@ export function PokerHome() {
       </section>
     </div>
 
-    <section className="minimal-contact" id="contact">
-      <div className="shell minimal-contact-inner">
-        <div><p>Contact</p><h2>Interested in working together?</h2></div>
-        <p>I&apos;m interested in thoughtful engineering, useful products, and research that becomes practical.</p>
-        <Link href="/contact">Get in touch <ArrowUpRight size={16} /></Link>
-      </div>
-    </section>
   </div>;
 }

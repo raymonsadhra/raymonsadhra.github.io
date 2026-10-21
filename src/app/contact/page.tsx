@@ -1,7 +1,12 @@
-"use client";
-import { useState } from "react";
-import { Copy, Check, FileText, Github, Linkedin } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PageIntro } from "@/components/PageIntro";
-import { links,hasLink } from "@/data/links";
-import { withBasePath } from "@/data/siteEnvironment";
-export default function Contact(){const [copied,setCopied]=useState(false);const copy=async()=>{if(!links.email)return;await navigator.clipboard.writeText(links.email);setCopied(true);setTimeout(()=>setCopied(false),1500)};const hasProfiles=hasLink(links.github)||hasLink(links.linkedin)||hasLink(links.resume);return <><PageIntro eyebrow="06 · Contact" title="Let’s build something useful." copy="I’m interested in ambitious engineering, thoughtful products, and research that becomes useful."/><section className="shell contact-grid"><div className="contact-main">{hasLink(links.email)?<><span>Email</span><a href={`mailto:${links.email}`}>{links.email}</a><button onClick={copy}>{copied?<Check/>:<Copy/>}{copied?"Copied":"Copy"}</button></>:<><span>Contact</span><p>Please use the channel where this portfolio was shared to get in touch.</p></>}</div>{hasProfiles&&<div className="contact-links">{hasLink(links.github)&&<a href={withBasePath(links.github)}><Github/>GitHub</a>}{hasLink(links.linkedin)&&<a href={withBasePath(links.linkedin)}><Linkedin/>LinkedIn</a>}{hasLink(links.resume)&&<a href={withBasePath(links.resume)}><FileText/>Résumé</a>}</div>}</section></>}
+
+export const metadata = { title: "Contact" };
+
+export default function Contact() {
+  return <>
+    <PageIntro eyebrow="Contact" title="Contact now lives on About." copy="Personal context and configured contact links are kept together in one concise place." />
+    <section className="shell page-section legacy-contact"><Link className="button" href="/about#contact">Go to About contact <ArrowRight size={16}/></Link></section>
+  </>;
+}
