@@ -15,4 +15,11 @@ describe("project content", () => {
     expect(ghostRunner?.architecture).toEqual(["React Native / Expo mobile app", "Tracking and race logic", "Firebase persistence"]);
     expect(ghostRunner?.decisions).toEqual(["Real-time GPS tracking", "Timestamped ghost replay", "Cloud-backed persistence"]);
   });
+  it("uses the approved terrain role, outcome, and pipeline", () => {
+    const terrain = getProject("minecraft-settlement-generator");
+    expect(terrain?.role).toBe("Road network project lead");
+    expect(terrain?.result).toContain("35%");
+    expect(terrain?.result).toContain("±1 elevation steps");
+    expect(terrain?.architecture).toHaveLength(6);
+  });
 });

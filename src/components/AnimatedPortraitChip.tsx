@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { withBasePath } from "@/data/siteEnvironment";
+import { getChipFlightFrame } from "@/data/chipFlight";
 
 type AnimatedPortraitChipProps = {
   portrait: string | null;
@@ -41,10 +42,8 @@ export function AnimatedPortraitChip({ portrait, objectPosition = "50% 50%", ani
     }
 
     const startSize = Math.min(310, window.innerWidth * 0.58, window.innerHeight * 0.58);
-    const startLeft = (window.innerWidth - destination.width) / 2;
-    const startTop = (window.innerHeight - destination.height) / 2;
-    const dx = startLeft - destination.left;
-    const dy = startTop - destination.top;
+    const originX = window.innerWidth / 2;
+    const originY = window.innerHeight / 2;
     const scale = startSize / destination.width;
     const flipper = motion.querySelector<HTMLElement>(".portrait-chip-flipper");
 
@@ -52,20 +51,31 @@ export function AnimatedPortraitChip({ portrait, objectPosition = "50% 50%", ani
     motion.classList.add("is-flying");
     Object.assign(motion.style, {
       position: "fixed",
-      left: `${destination.left}px`,
-      top: `${destination.top}px`,
+      left: "0px",
+      top: "0px",
       width: `${destination.width}px`,
       height: `${destination.height}px`,
       visibility: "visible",
       zIndex: "150",
+      pointerEvents: "none",
     });
 
-    const flight = motion.animate([
-      { transform: `translate3d(${dx}px, ${dy}px, 0) scale(${scale}) rotateX(8deg) rotateZ(-5deg)`, offset: 0 },
-      { transform: `translate3d(${dx * .76 + 22}px, ${dy * .82 - 12}px, 0) scale(${scale * .91}) rotateX(-6deg) rotateZ(7deg)`, offset: .42 },
-      { transform: `translate3d(${dx * .2 - 10}px, ${dy * .24}px, 0) scale(${1 + (scale - 1) * .18}) rotateX(3deg) rotateZ(-2deg)`, offset: .82 },
-      { transform: "translate3d(0, 0, 0) scale(1) rotateX(0deg) rotateZ(0deg)", offset: 1 },
-    ], { duration: 1850, easing: "cubic-bezier(.2,.72,.18,1)", fill: "forwards" });
+    const duration = 1850;
+    let flightFrame = 0;
+    let resolveFlight: (() => void) | undefined;
+    const flightFinished = new Promise<void>((resolve) => { resolveFlight = resolve; });
+    const initialFrame = getChipFlightFrame({ progress: 0, originX, originY, destination, baseWidth: destination.width, startScale: scale });
+    motion.style.transform = `translate3d(${initialFrame.x}px, ${initialFrame.y}px, 0) scale(${initialFrame.scale}) rotateX(${initialFrame.rotateX}deg) rotateZ(${initialFrame.rotateZ}deg)`;
+    const startedAt = performance.now();
+    const renderFlight = (now: number) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const currentDestination = shell.getBoundingClientRect();
+      const frame = getChipFlightFrame({ progress, originX, originY, destination: currentDestination, baseWidth: destination.width, startScale: scale });
+      motion.style.transform = `translate3d(${frame.x}px, ${frame.y}px, 0) scale(${frame.scale}) rotateX(${frame.rotateX}deg) rotateZ(${frame.rotateZ}deg)`;
+      if (progress < 1) flightFrame = window.requestAnimationFrame(renderFlight);
+      else resolveFlight?.();
+    };
+    flightFrame = window.requestAnimationFrame(renderFlight);
 
     const flip = flipper?.animate([
       { transform: "rotateY(0deg)", offset: 0 },
@@ -78,9 +88,10 @@ export function AnimatedPortraitChip({ portrait, objectPosition = "50% 50%", ani
     const finish = () => {
       if (finished) return;
       finished = true;
+      window.cancelAnimationFrame(flightFrame);
       showFinal();
     };
-    Promise.all([flight.finished, flip?.finished ?? Promise.resolve()]).then(finish).catch(finish);
+    Promise.all([flightFinished, flip?.finished ?? Promise.resolve()]).then(finish).catch(finish);
     const failSafe = window.setTimeout(finish, 2300);
     const onViewportChange = () => finish();
     const onVisibilityChange = () => { if (document.hidden) finish(); };
@@ -91,7 +102,7 @@ export function AnimatedPortraitChip({ portrait, objectPosition = "50% 50%", ani
       window.clearTimeout(failSafe);
       window.removeEventListener("resize", onViewportChange);
       document.removeEventListener("visibilitychange", onVisibilityChange);
-      flight.cancel();
+      window.cancelAnimationFrame(flightFrame);
       flip?.cancel();
     };
   }, [animate]);

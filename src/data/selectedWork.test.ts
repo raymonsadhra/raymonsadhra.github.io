@@ -51,4 +51,8 @@ describe("V14 selected work", () => {
     expect(ghostRunner?.description).toBe("A live running ghost that gamifies exercise and lets you race against your past self.");
     expect(ghostRunner?.recognition).toBe("CruzHacks 2026 winner");
   });
+
+  it("labels the terrain project as accepted original research", () => {
+    expect(selectedWork.find((item) => item.title === "Terrain-Adaptive Settlements")?.recognition).toBe("Original Research Accepted in EXAG'26");
+  });
 });
