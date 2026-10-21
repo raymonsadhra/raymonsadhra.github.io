@@ -11,8 +11,8 @@ const stages = [
 
 export function RagSystemMap() {
   return <section className="rag-system-map" aria-labelledby="rag-system-map-title">
-    <p className="eyebrow">System map</p>
-    <h2 id="rag-system-map-title">Evidence stays connected to its moment.</h2>
+    <p className="eyebrow">Architecture</p>
+    <h2 id="rag-system-map-title">System Map</h2>
     <p className="rag-system-summary">The pipeline converts video signals into shared temporal windows before embedding and retrieval, so answers can use evidence that remains aligned across transcript, screen text, visual captions, and frame references.</p>
     <ol aria-label="RAG Motion processing and retrieval pipeline">
       {stages.map((stage, index) => <li className={stage.featured ? "featured" : ""} key={stage.number}>

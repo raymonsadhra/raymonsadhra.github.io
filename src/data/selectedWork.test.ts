@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getWorkMarker, selectedWork, visibleSelectedWork } from "./selectedWork";
 
-describe("V13 selected work", () => {
+describe("V14 selected work", () => {
   it("keeps the six requested entries visible and ordered", () => {
     expect(visibleSelectedWork.map((item) => item.title)).toEqual([
       "Capital One — SLA Sentry",
@@ -33,5 +33,22 @@ describe("V13 selected work", () => {
 
   it("uses the approved RAG Motion homepage description", () => {
     expect(selectedWork.find((item) => item.title === "RAG Motion")?.description).toBe("End-to-end multimodal video RAG system for semantic search and grounded Q&A.");
+  });
+
+  it("uses the approved work-type labels", () => {
+    expect(visibleSelectedWork.map((item) => item.context)).toEqual([
+      "Software Engineer Internship",
+      "Personal Project",
+      "Hackathon Project",
+      "Research Project",
+      "Software Engineer Internship",
+      "Research Project",
+    ]);
+  });
+
+  it("uses the approved Ghost Runner description and keeps its recognition", () => {
+    const ghostRunner = selectedWork.find((item) => item.title === "Ghost Runner");
+    expect(ghostRunner?.description).toBe("A live running ghost that gamifies exercise and lets you race against your past self.");
+    expect(ghostRunner?.recognition).toBe("CruzHacks 2026 winner");
   });
 });

@@ -20,11 +20,11 @@ export const projects: Project[] = [
   },
   {
     slug: "ghost-runner", title: "Ghost Runner", kicker: "CruzHacks 2026 winner",
-    summary: "A mobile running companion that turns a previous route into a live race against your past self.",
+    summary: "A live running ghost that gamifies exercise and lets you race against your past self.",
     categories: ["Web & Mobile"], stack: ["React Native", "Expo", "Firebase"], year: "2026", tone: "lime", featured: true, status: "Hackathon winner",
     problem: "Solo runs lack the immediate competition and pacing feedback of a real race.", role: "Project lead; built the route tracking and replay experience.",
-    architecture: ["Live GPS samples", "Timestamp normalization", "Trajectory interpolation", "Synchronized race replay"],
-    decisions: ["Used timestamped GPS traces as the replay source of truth", "Interpolated between sparse samples for smoother comparison", "Kept the live state legible at running speed"],
+    architecture: ["React Native / Expo mobile app", "Tracking and race logic", "Firebase persistence"],
+    decisions: ["Real-time GPS tracking", "Timestamped ghost replay", "Cloud-backed persistence"],
     result: "Winner at CruzHacks 2026.", media: ["Live race screen", "Route history", "Replay comparison"],
   },
   {

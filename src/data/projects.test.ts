@@ -10,4 +10,9 @@ describe("project content", () => {
   it("resolves every project detail route", () => {
     projects.forEach((project) => expect(getProject(project.slug)).toEqual(project));
   });
+  it("models Ghost Runner without inventing a custom backend", () => {
+    const ghostRunner = getProject("ghost-runner");
+    expect(ghostRunner?.architecture).toEqual(["React Native / Expo mobile app", "Tracking and race logic", "Firebase persistence"]);
+    expect(ghostRunner?.decisions).toEqual(["Real-time GPS tracking", "Timestamped ghost replay", "Cloud-backed persistence"]);
+  });
 });

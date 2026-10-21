@@ -21,7 +21,7 @@ const decisions = [
 ] as const;
 
 function SectionMarker({ number, label }: { number: string; label: string }) {
-  return <div className="capital-section-marker"><span>{number}</span><p>{label}</p></div>;
+  return <div className="capital-section-marker"><span>{number}</span><h2>{label}</h2></div>;
 }
 
 export default function CapitalOneCaseStudy() {
@@ -36,17 +36,17 @@ export default function CapitalOneCaseStudy() {
 
     <section className="capital-sentry-section">
       <SectionMarker number="01" label="Engineering Problem"/>
-      <div><h2>Monitoring deadlines reliably.</h2><p>The correspondence-processing workflow involved manual monitoring overhead, repeated service-level calculations, configuration complexity, and inconsistent mappings across data boundaries. The engineering challenge was to make deadline visibility more configurable and dependable without duplicating processing logic.</p></div>
+      <div><h3>Monitoring deadlines reliably.</h3><p>The correspondence-processing workflow involved manual monitoring overhead, repeated service-level calculations, configuration complexity, and inconsistent mappings across data boundaries. The engineering challenge was to make deadline visibility more configurable and dependable without duplicating processing logic.</p></div>
     </section>
 
     <section className="capital-sentry-section ownership">
       <SectionMarker number="02" label="Engineering Ownership"/>
-      <div><h2>Configurable processing with reusable results.</h2><p>I focused on making the workflow tenant-agnostic, reusable, and easier to monitor while preserving correctness.</p><ol>{ownership.map((item,index)=><li key={item}><span>0{index+1}</span><p>{item}</p></li>)}</ol></div>
+      <div><h3>Configurable processing with reusable results.</h3><p>I focused on making the workflow tenant-agnostic, reusable, and easier to monitor while preserving correctness.</p><ol>{ownership.map((item,index)=><li key={item}><span>0{index+1}</span><p>{item}</p></li>)}</ol></div>
     </section>
 
     <section className="capital-sentry-section decisions">
       <SectionMarker number="03" label="Decisions & Tradeoffs"/>
-      <div><h2>Reliability through deliberate boundaries.</h2><div className="capital-decision-grid">{decisions.map(([title,copy])=><article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div>
+      <div><h3 className="capital-section-headline">Reliability through deliberate boundaries.</h3><div className="capital-decision-grid">{decisions.map(([title,copy])=><article key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></div>
     </section>
 
     <CaseStudyBackLink className="capital-bottom-back"/>
