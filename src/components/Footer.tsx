@@ -8,5 +8,5 @@ import { withBasePath } from "@/data/siteEnvironment";
 export function Footer() { const path=usePathname(); if(path==="/")return null; return <footer className="footer"><div className="shell footer-inner">
   <p className="eyebrow">Say hello</p><h2>Let’s build something<br/><em>useful.</em></h2>
   <div className="footer-row"><div>{hasLink(links.email)?<a className="button" href={`mailto:${links.email}`}>Start a conversation <ArrowUpRight size={16}/></a>:<Link className="button" href="/about#contact">About &amp; contact <ArrowUpRight size={16}/></Link>}</div><div className="footer-links">{hasLink(links.github)&&<a href={withBasePath(links.github)}>GitHub</a>}{hasLink(links.linkedin)&&<a href={withBasePath(links.linkedin)}>LinkedIn</a>}{hasLink(links.resume)&&<a href={withBasePath(links.resume)}>Résumé</a>}</div></div>
-  <div className="footer-bottom"><span>Raymon Sadhra · California</span><span>Software engineering · 2026</span></div>
+  <div className="footer-bottom"><span>Raymon Sadhra · San Francisco, CA</span><span>Software engineering · 2026</span></div>
   </div></footer> }

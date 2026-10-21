@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { getWorkMarker, selectedWork, visibleSelectedWork } from "./selectedWork";
 
-describe("V10 selected work", () => {
+describe("V12 selected work", () => {
   it("keeps the six requested entries visible and ordered", () => {
     expect(visibleSelectedWork.map((item) => item.title)).toEqual([
-      "Capital One",
+      "Capital One — SLA Sentry",
       "RAG Motion",
       "Ghost Runner",
       "Terrain-Adaptive Settlements",
@@ -22,5 +22,12 @@ describe("V10 selected work", () => {
     expect(getWorkMarker("Protein Modeling")).toBe("PM");
     expect(getWorkMarker("Causeway")).toBe("C");
     expect(getWorkMarker("Ambiguous Title", "ATX")).toBe("ATX");
+  });
+
+  it("uses the approved SLA Sentry homepage copy while retaining detailed technology data", () => {
+    const capitalOne = selectedWork.find((item) => item.href === "/work/capital-one");
+    expect(capitalOne?.title).toBe("Capital One — SLA Sentry");
+    expect(capitalOne?.description).toBe("Configurable monitoring for enterprise correspondence systems.");
+    expect(capitalOne?.tags).toEqual(["Python", "Databricks", "Reliability"]);
   });
 });

@@ -3,7 +3,7 @@ export type OptionalLink = string | null;
 export const links = {
   github: null as OptionalLink,
   linkedin: null as OptionalLink,
-  email: null as OptionalLink,
+  email: "raymonsadhra@gmail.com" as OptionalLink,
   resume: null as OptionalLink,
   googleScholar: null as OptionalLink,
   domain: null as OptionalLink,

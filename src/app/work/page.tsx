@@ -18,7 +18,8 @@ const experienceRoutes: Record<string, string> = {
 };
 
 function WorkEntry({ item, index }: { item: Experience; index: number }) {
-  const content = <><PokerChip label={getWorkMarker(item.org)} tone={index % 2 ? "burgundy" : "forest"} size="sm"/><div><span>{item.date}</span><h2>{item.org}</h2><strong>{item.role}</strong><p>{item.summary}</p></div>{experienceRoutes[item.org] && <ArrowUpRight size={17} aria-hidden="true"/>}</>;
+  const title = item.org === "Capital One" ? "Capital One — SLA Sentry" : item.org;
+  const content = <><PokerChip label={getWorkMarker(item.org)} tone={index % 2 ? "burgundy" : "forest"} size="sm"/><div><span>{item.date}</span><h2>{title}</h2><strong>{item.role}</strong><p>{item.summary}</p></div>{experienceRoutes[item.org] && <ArrowUpRight size={17} aria-hidden="true"/>}</>;
   return experienceRoutes[item.org] ? <Link className="all-work-entry" href={experienceRoutes[item.org]}>{content}</Link> : <article className="all-work-entry">{content}</article>;
 }
 

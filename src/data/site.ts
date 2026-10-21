@@ -17,7 +17,7 @@ export const navItems = [
 export const nowItems = [
   "M.S. Computer Science · UC San Diego",
   "Exploring reliable multimodal systems",
-  "Based in California",
+  "Based in San Francisco, CA",
 ] as const;
 
 export const skillGroups = [

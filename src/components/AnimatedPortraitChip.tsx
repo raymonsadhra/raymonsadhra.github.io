@@ -4,8 +4,6 @@ import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { withBasePath } from "@/data/siteEnvironment";
 
-const introStorageKey = "raymon-v11-portrait-intro-seen";
-
 type AnimatedPortraitChipProps = {
   portrait: string | null;
   objectPosition?: string;
@@ -32,13 +30,10 @@ export function AnimatedPortraitChip({ portrait, objectPosition = "50% 50%", ani
     };
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const seen = window.sessionStorage.getItem(introStorageKey);
-    if (!animate || reducedMotion || seen) {
+    if (!animate || reducedMotion) {
       showFinal();
       return;
     }
-
-    window.sessionStorage.setItem(introStorageKey, "true");
     const destination = shell.getBoundingClientRect();
     if (!destination.width || !destination.height) {
       showFinal();

@@ -1,12 +1,12 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { Mail } from "lucide-react";
 import { PageIntro } from "@/components/PageIntro";
+import { links } from "@/data/links";
 
 export const metadata = { title: "Contact" };
 
 export default function Contact() {
   return <>
-    <PageIntro eyebrow="Contact" title="Contact now lives on About." copy="Personal context and configured contact links are kept together in one concise place." />
-    <section className="shell page-section legacy-contact"><Link className="button" href="/about#contact">Go to About contact <ArrowRight size={16}/></Link></section>
+    <PageIntro eyebrow="Contact" title="Let’s start a conversation." copy="Use your preferred email application to get in touch directly." />
+    <section className="shell page-section legacy-contact"><a className="button" href={`mailto:${links.email}`}>Compose an email <Mail size={16}/></a></section>
   </>;
 }
