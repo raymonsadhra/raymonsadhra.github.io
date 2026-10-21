@@ -1,8 +1,53 @@
-import { PageIntro } from "@/components/PageIntro";
-import { AnimatedPortraitChip } from "@/components/AnimatedPortraitChip";
-import { FileText, Github, Linkedin, Mail } from "lucide-react";
+import { FileText, Github, GraduationCap, Linkedin, Mail, Search } from "lucide-react";
 import { hasLink, links } from "@/data/links";
-import { media } from "@/data/media";
 import { withBasePath } from "@/data/siteEnvironment";
-export const metadata={title:"About"};
-export default function About(){const contactLinks=[{label:"Email",value:links.email?`mailto:${links.email}`:null,icon:Mail},{label:"GitHub",value:links.github,icon:Github},{label:"LinkedIn",value:links.linkedin,icon:Linkedin},{label:"Résumé",value:links.resume,icon:FileText}];const hasContact=contactLinks.some(item=>hasLink(item.value));return <><PageIntro eyebrow="About" title="Curiosity, practiced consistently." copy="I’m a software engineer and computer science graduate student who likes following complex questions all the way to something useful."/><section className="shell about-story v11-about-story"><div className="about-portrait"><AnimatedPortraitChip portrait={media.profile.portrait} objectPosition={media.profile.portraitPosition} animate={false}/></div><div className="about-copy"><p className="dropcap">I started learning programming independently in high school through online courses and videos. I completed my B.S. in Computer Science at UC Santa Cruz in 2026 and am pursuing my M.S. in Computer Science at UC San Diego, expected 2028.</p><p>I’m drawn to problems that sit between disciplines: a video that needs to become searchable, a codebase that needs to explain itself, a landscape that needs roads, or a molecular system that needs a useful representation.</p><p>As a first-generation student, my approach is grounded in discipline, curiosity, consistency, and continuous learning. Outside engineering, I enjoy fitness, journaling, and pickleball.</p></div><div className="about-ledger"><span>Education</span><strong>UC San Diego</strong><p>M.S. Computer Science · Expected 2028</p><strong>UC Santa Cruz</strong><p>B.S. Computer Science · 2026</p></div></section><section className="shell about-highlights"><p className="eyebrow">Experience highlights</p><div><article><span>Engineering</span><h2>Backend systems and developer tools</h2><p>Configurable processing, repository analysis, static analysis, and automation.</p></article><article><span>Applied AI</span><h2>Retrieval and scientific ML</h2><p>Multimodal RAG, vector search, graph neural networks, and molecular modeling.</p></article></div></section><section className="shell about-values"><p className="eyebrow">A few operating principles</p>{["Make the hard thing understandable.","Evidence over ornament.","Build across boundaries.","Keep learning consistently."].map((v,i)=><div key={v}><span>0{i+1}</span><h3>{v}</h3></div>)}</section><section className="about-contact" id="contact"><div className="shell about-contact-inner"><div><p className="eyebrow">Contact</p><h2>Interested in working together?</h2><p>I’m interested in thoughtful engineering, useful products, and research that becomes practical.</p></div>{hasContact?<div className="about-contact-links">{contactLinks.map(({label,value,icon:Icon})=>hasLink(value)&&<a href={withBasePath(value)} key={label}><Icon size={17}/>{label}</a>)}</div>:<p className="contact-fallback">Please use the channel where this portfolio was shared to get in touch. Public contact links will appear here once configured.</p>}</div></section></>}
+
+export const metadata = {
+  title: "About Me",
+  description: "Raymon Sadhra's background, education, current endeavors, and contact information.",
+};
+
+const contactLinks = [
+  { label: "Email", href: links.email ? `mailto:${links.email}` : null, icon: Mail, external: false },
+  { label: "LinkedIn", href: links.linkedin, icon: Linkedin, external: true },
+  { label: "GitHub", href: links.github, icon: Github, external: true },
+  { label: "Resume", href: links.resume, icon: FileText, external: true },
+] as const;
+
+export default function About() {
+  return <article className="about-v18 shell">
+    <header className="about-v18-intro">
+      <p className="eyebrow">About Me</p>
+      <h1>A little about me.</h1>
+      <div className="about-v18-copy">
+        <p>I&apos;m a first-generation college student who started learning to code independently in high school through online courses and YouTube tutorials. What began as curiosity about how software works gradually became an interest in building systems, solving complex problems, and turning ideas into useful applications.</p>
+        <p>I earned my B.S. in Computer Science from UC Santa Cruz and am now pursuing my M.S. in Computer Science at UC San Diego. Along the way, I&apos;ve explored software engineering, developer tooling, artificial intelligence, and research through internships and hands-on projects.</p>
+        <p>Outside of programming, I enjoy staying active, working out, playing pickleball, journaling, and finding new things to learn. I value consistency, curiosity, and the process of getting a little better at something over time.</p>
+      </div>
+    </header>
+
+    <section className="about-v18-section about-v18-education" aria-labelledby="education-title">
+      <div className="about-v18-label"><GraduationCap size={18} aria-hidden="true"/><p className="eyebrow">Education</p></div>
+      <div>
+        <h2 id="education-title">Education</h2>
+        <div className="education-entries">
+          <article><span>Expected 2028</span><h3>UC San Diego</h3><p>M.S. Computer Science</p></article>
+          <article><span>Graduated 2026</span><h3>UC Santa Cruz</h3><p>B.S. Computer Science</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section className="about-v18-section current-endeavors" aria-labelledby="endeavors-title">
+      <div className="about-v18-label"><Search size={18} aria-hidden="true"/><p className="eyebrow">Now</p></div>
+      <div><h2 id="endeavors-title">Current Endeavors</h2><p>Currently exploring research opportunities at the University of California, San Diego.</p></div>
+    </section>
+
+    <section className="about-v18-contact" id="contact" aria-labelledby="contact-title">
+      <p className="eyebrow">Contact</p>
+      <h2 id="contact-title">That&apos;s enough about me for now. Feel free to introduce yourself!</h2>
+      <nav aria-label="Contact links">
+        {contactLinks.map(({ label, href, icon: Icon, external }) => hasLink(href) && <a key={label} href={withBasePath(href)} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} aria-label={label === "Resume" ? "Open Raymon Sadhra's resume PDF" : undefined}><Icon size={17} aria-hidden="true"/>{label}</a>)}
+      </nav>
+    </section>
+  </article>;
+}

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, FileText, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { hasLink, links } from "@/data/links";
 import { getWorkMarker, visibleSelectedWork } from "@/data/selectedWork";
 import { withBasePath } from "@/data/siteEnvironment";
@@ -8,8 +8,8 @@ import { PokerChip } from "./PokerChip";
 import { AnimatedPortraitChip } from "./AnimatedPortraitChip";
 
 const profileLinks = [
-  { label: "GitHub", value: links.github, icon: Github },
   { label: "LinkedIn", value: links.linkedin, icon: Linkedin },
+  { label: "GitHub", value: links.github, icon: Github },
 ] as const;
 
 export function PokerHome() {
@@ -21,11 +21,10 @@ export function PokerHome() {
         <h1 id="profile-name">Raymon Sadhra</h1>
         <h2>Software Engineer &amp; Computer Science Graduate Student</h2>
         <div className="profile-education"><span>M.S. CS — UCSD</span><span>B.S. CS — UCSC</span></div>
-        <p className="profile-intro">I&apos;m a software engineer and M.S. Computer Science student at UC San Diego. I enjoy building backend systems, developing applied AI applications, and working with large datasets to turn complex problems into reliable, long-lasting software.</p>
+        <p className="profile-intro">I&apos;m a software engineer and M.S. Computer Science student at UC San Diego. I&apos;m most at home when I can work on creating long lasting solutions to complex problems</p>
         <div className="profile-links">
-          {profileLinks.map(({ label, value, icon: Icon }) => hasLink(value) && <a key={label} href={withBasePath(value)}><Icon size={15} />{label}</a>)}
-          {hasLink(links.resume) && <a href={withBasePath(links.resume)}><FileText size={15} />Résumé</a>}
           {hasLink(links.email)&&<a href={`mailto:${links.email}`}><Mail size={15} />Contact</a>}
+          {profileLinks.map(({ label, value, icon: Icon }) => hasLink(value) && <a key={label} href={withBasePath(value)} target="_blank" rel="noopener noreferrer"><Icon size={15} />{label}</a>)}
         </div>
       </aside>
 

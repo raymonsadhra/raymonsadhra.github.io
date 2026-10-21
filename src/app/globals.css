@@ -200,3 +200,29 @@ main:has(.case-study-page){background:var(--poker-ivory);color:var(--poker-charc
 .tech4good-case header h1{max-width:1050px;font-size:clamp(3.2rem,7.2vw,6.8rem)}
 @media(max-width:700px){.tech4good-case header h1{font-size:clamp(2.9rem,13vw,4.8rem)}.project-hero-image.project-tech4good.large{min-height:80vw}}
 @media(max-width:800px){.nav-links.chip-nav{position:static;inset:auto;padding:0;flex-direction:row;background:transparent;border:0;border-radius:0;box-shadow:none;opacity:1;pointer-events:auto;transform:none}.chip-nav a:not(.resume-link){justify-content:center}.menu{display:none}}
+
+/* V18 — personal About page and shared profile links */
+main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),transparent 44%),var(--poker-ivory);color:var(--poker-charcoal)}
+.about-v18{padding-top:clamp(3.5rem,7vw,6.5rem);padding-bottom:clamp(4rem,8vw,7rem)}
+.about-v18 .eyebrow{color:var(--poker-burgundy);font-weight:800;letter-spacing:.14em}
+.about-v18-intro{max-width:900px;padding-bottom:clamp(3.5rem,7vw,6rem)}
+.about-v18-intro h1{max-width:820px;margin:.18em 0 .55em;color:var(--poker-felt);font:650 clamp(3.4rem,7.5vw,7rem)/.88 "DM Sans Variable";letter-spacing:-.065em}
+.about-v18-copy{max-width:760px;color:#56665f;font-size:clamp(1rem,1.45vw,1.16rem);line-height:1.82}
+.about-v18-copy p{margin:0 0 1.35rem}
+.about-v18-section{display:grid;grid-template-columns:minmax(160px,.32fr) minmax(0,.68fr);gap:clamp(2rem,7vw,7rem);padding:clamp(3rem,6vw,5rem) 0;border-top:1px solid rgba(193,160,108,.62)}
+.about-v18-label{display:flex;align-items:center;gap:.7rem;align-self:start;color:var(--poker-burgundy)}
+.about-v18-label .eyebrow{margin:0}
+.about-v18-section h2,.about-v18-contact h2{margin:0;color:var(--poker-felt);font:650 clamp(2.3rem,4.8vw,4.5rem)/.98 "DM Sans Variable";letter-spacing:-.052em}
+.education-entries{display:grid;grid-template-columns:1fr 1fr;margin-top:2rem;border-top:1px solid rgba(20,61,50,.18)}
+.education-entries article{padding:1.5rem 2rem 1.5rem 0;border-bottom:1px solid rgba(20,61,50,.16)}
+.education-entries article+article{padding-left:2rem;border-left:1px solid rgba(20,61,50,.16)}
+.education-entries span{color:var(--poker-burgundy);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+.education-entries h3{margin:.35rem 0 .2rem;color:var(--poker-felt);font:700 clamp(1.35rem,2vw,1.8rem)/1.1 "DM Sans Variable"}
+.education-entries p,.current-endeavors p{margin:0;color:#607069}
+.current-endeavors>div:last-child>p{max-width:650px;margin-top:1.2rem;font-size:clamp(1.05rem,1.6vw,1.2rem);line-height:1.75}
+.about-v18-contact{scroll-margin-top:80px;padding-top:clamp(3.5rem,7vw,6rem);border-top:1px solid rgba(193,160,108,.62)}
+.about-v18-contact h2{max-width:900px;margin:.28em 0 .65em}
+.about-v18-contact nav{display:flex;flex-wrap:wrap;gap:.65rem 1.6rem;padding-top:1.4rem;border-top:1px solid rgba(20,61,50,.18)}
+.about-v18-contact a{display:inline-flex;align-items:center;gap:.45rem;padding:.35rem 0;border-bottom:1px solid var(--poker-gold);color:var(--poker-felt);font-size:.78rem;font-weight:800;transition:color .2s,border-color .2s}
+.about-v18-contact a:hover{color:var(--poker-burgundy);border-color:var(--poker-burgundy)}
+@media(max-width:700px){.about-v18{padding-top:3rem}.about-v18-intro h1{font-size:clamp(3.1rem,15vw,5rem)}.about-v18-section{grid-template-columns:1fr;gap:1.5rem;padding-block:3rem}.education-entries{grid-template-columns:1fr}.education-entries article,.education-entries article+article{padding:1.35rem 0;border-left:0}.about-v18-contact nav{gap:.6rem 1.2rem}}
