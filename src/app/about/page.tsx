@@ -3,7 +3,7 @@ import { PhotoPokerChip } from "@/components/PhotoPokerChip";
 import { educationPhotoChips, introductionPhotoChips } from "@/data/about";
 import { hasLink, links } from "@/data/links";
 import { withBasePath } from "@/data/siteEnvironment";
-import { analyticsEvents, isUmamiAnalyticsEnabled } from "@/data/analytics";
+import { analyticsEvents } from "@/data/analytics";
 
 export const metadata = {
   title: "About Me",
@@ -59,7 +59,6 @@ export default function About() {
       <nav aria-label="Contact links">
         {contactLinks.map(({ label, href, icon: Icon, external }) => hasLink(href) && <a key={label} href={withBasePath(href)} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined} aria-label={label === "Resume" ? "Open Raymon Sadhra's resume PDF" : undefined} data-umami-event={label === "Email" ? analyticsEvents.emailClick : label === "LinkedIn" ? analyticsEvents.linkedinClick : label === "GitHub" ? analyticsEvents.githubClick : analyticsEvents.resumeClick}><Icon size={17} aria-hidden="true"/>{label}</a>)}
       </nav>
-      {isUmamiAnalyticsEnabled() && <p className="analytics-disclosure">This site uses privacy-friendly, cookie-free analytics to measure aggregate visits and link engagement.</p>}
     </section>
   </article>;
 }

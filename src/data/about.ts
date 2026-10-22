@@ -38,7 +38,7 @@ export const educationPhotoChips: PhotoPokerChipData[] = [
   {
     imageSrc: "/images/about/chip4.jpg",
     alt: "Raymon wearing a UC Santa Cruz graduation stole at the beach",
-    caption: "Graduation By The Beach",
+    caption: "Graduation By The Sea",
     placeholder: "Photo 04",
     tone: "forest",
     objectPosition: "50% 48%",

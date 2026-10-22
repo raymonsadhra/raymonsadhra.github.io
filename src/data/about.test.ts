@@ -28,7 +28,7 @@ describe("About photo chip configuration", () => {
       "The Best Season",
       "Yosemite Vernal Falls",
       "Pasta Night",
-      "Graduation By The Beach",
+      "Graduation By The Sea",
       "CruzHacks 2026",
       "Exploring UC San Diego",
     ]);

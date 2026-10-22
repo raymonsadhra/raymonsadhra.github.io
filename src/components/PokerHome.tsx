@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import { hasLink, links } from "@/data/links";
@@ -7,6 +9,7 @@ import { media } from "@/data/media";
 import { PokerChip } from "./PokerChip";
 import { AnimatedPortraitChip } from "./AnimatedPortraitChip";
 import { analyticsEvents, featuredProjectIdByHref } from "@/data/analytics";
+import { usePortfolioKeyboardNavigation } from "./PortfolioKeyboardNavigation";
 
 const profileLinks = [
   { label: "LinkedIn", value: links.linkedin, icon: Linkedin },
@@ -14,6 +17,8 @@ const profileLinks = [
 ] as const;
 
 export function PokerHome() {
+  const { selectedWorkIndex } = usePortfolioKeyboardNavigation();
+
   return <div className="minimal-home" id="home">
     <div className="shell profile-work-layout">
       <aside className="profile-sidebar" aria-labelledby="profile-name">
@@ -34,7 +39,7 @@ export function PokerHome() {
           <h2 id="selected-work-title">Featured Work</h2>
         </header>
         <div className="selected-work-list">
-          {visibleSelectedWork.map((item, index) => <Link className="selected-work-row" href={item.href} key={item.title} data-umami-event={analyticsEvents.featuredWorkClick} data-umami-event-project={featuredProjectIdByHref[item.href]}>
+          {visibleSelectedWork.map((item, index) => <Link className="selected-work-row" href={item.href} key={item.title} data-featured-work-index={index} data-keyboard-selected={selectedWorkIndex === index ? "true" : undefined} data-umami-event={analyticsEvents.featuredWorkClick} data-umami-event-project={featuredProjectIdByHref[item.href]}>
             <div className="work-marker"><PokerChip label={getWorkMarker(item.title, item.marker)} tone={index % 3 === 0 ? "burgundy" : index % 3 === 1 ? "forest" : "gold"} size="sm" /></div>
             <div className="work-copy">
               {item.recognition&&<p className="work-recognition">{item.recognition}</p>}<p className="work-type">{item.context}</p><h3>{item.title}</h3><span>{item.description}</span>
