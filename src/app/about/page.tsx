@@ -1,6 +1,6 @@
 import { FileText, Github, GraduationCap, Linkedin, Mail, Search } from "lucide-react";
 import { PhotoPokerChip } from "@/components/PhotoPokerChip";
-import { educationPhotoChip, introductionPhotoChips } from "@/data/about";
+import { educationPhotoChips, introductionPhotoChips } from "@/data/about";
 import { hasLink, links } from "@/data/links";
 import { withBasePath } from "@/data/siteEnvironment";
 import { analyticsEvents, isUmamiAnalyticsEnabled } from "@/data/analytics";
@@ -43,8 +43,8 @@ export default function About() {
           <article><span>Graduated 2026</span><h3>UC Santa Cruz</h3><p>B.S. Computer Science</p></article>
         </div>
       </div>
-      <div className="about-v20-education-photo">
-        <PhotoPokerChip {...educationPhotoChip} size="feature" />
+      <div className="about-v20-education-photos" aria-label="Education and current endeavors photo placeholders">
+        {educationPhotoChips.map((chip, index) => <PhotoPokerChip key={chip.placeholder} {...chip} className={`education-photo-zigzag-${index + 1}`} />)}
       </div>
       <div className="about-v20-endeavors current-endeavors" aria-labelledby="endeavors-title">
         <div className="about-v18-label"><Search size={18} aria-hidden="true"/><p className="eyebrow">Now</p></div>

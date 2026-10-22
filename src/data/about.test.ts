@@ -1,16 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { educationPhotoChip, introductionPhotoChips } from "./about";
+import { educationPhotoChips, introductionPhotoChips } from "./about";
 
 describe("About photo chip configuration", () => {
-  it("provides exactly four editable photo placeholders", () => {
-    const chips = [...introductionPhotoChips, educationPhotoChip];
+  it("provides two three-chip clusters with editable photo placeholders", () => {
+    const chips = [...introductionPhotoChips, ...educationPhotoChips];
 
-    expect(chips).toHaveLength(4);
+    expect(introductionPhotoChips).toHaveLength(3);
+    expect(educationPhotoChips).toHaveLength(3);
+    expect(chips).toHaveLength(6);
     expect(chips.map((chip) => chip.placeholder)).toEqual([
       "Photo 01",
       "Photo 02",
       "Photo 03",
       "Photo 04",
+      "Photo 05",
+      "Photo 06",
     ]);
     expect(chips.every((chip) => chip.caption === "Caption placeholder")).toBe(true);
     expect(chips.every((chip) => chip.imageSrc === null)).toBe(true);

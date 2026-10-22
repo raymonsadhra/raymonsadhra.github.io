@@ -31,10 +31,26 @@ export const introductionPhotoChips: PhotoPokerChipData[] = [
   },
 ];
 
-export const educationPhotoChip: PhotoPokerChipData = {
-  imageSrc: null,
-  alt: "",
-  caption: "Caption placeholder",
-  placeholder: "Photo 04",
-  tone: "forest",
-};
+export const educationPhotoChips: PhotoPokerChipData[] = [
+  {
+    imageSrc: null,
+    alt: "",
+    caption: "Caption placeholder",
+    placeholder: "Photo 04",
+    tone: "forest",
+  },
+  {
+    imageSrc: null,
+    alt: "",
+    caption: "Caption placeholder",
+    placeholder: "Photo 05",
+    tone: "burgundy",
+  },
+  {
+    imageSrc: null,
+    alt: "",
+    caption: "Caption placeholder",
+    placeholder: "Photo 06",
+    tone: "navy",
+  },
+];

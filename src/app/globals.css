@@ -319,18 +319,24 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
 .about-v20-details {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
-  grid-template-areas: "education photo" "endeavors photo";
+  grid-template-areas: "education photos" "endeavors photos";
   gap: 0 clamp(3rem, 7vw, 7rem);
   padding: clamp(3rem, 6vw, 5rem) 0;
   border-top: 1px solid rgba(193,160,108,.62);
 }
 .about-v20-education { grid-area: education; }
-.about-v20-education-photo {
-  grid-area: photo;
+.about-v20-education-photos {
+  grid-area: photos;
   display: grid;
-  place-items: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: "first ." ". second" "third .";
+  gap: .4rem 1rem;
+  align-items: start;
   align-self: center;
 }
+.education-photo-zigzag-1 { grid-area: first; }
+.education-photo-zigzag-2 { grid-area: second; }
+.education-photo-zigzag-3 { grid-area: third; }
 .about-v20-endeavors {
   grid-area: endeavors;
   padding-top: clamp(3rem, 6vw, 5rem);
@@ -357,6 +363,10 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   .photo-zigzag-1, .photo-zigzag-3 { justify-self: end; }
   .photo-zigzag-2 { justify-self: start; }
   .about-v20-details { grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr); gap: 0 2.5rem; }
+  .about-v20-education-photos { grid-template-columns: 1fr; grid-template-areas: "first" "second" "third"; gap: 1.25rem; }
+  .about-v20-education-photos .photo-poker-chip { width: min(100%, 190px); }
+  .education-photo-zigzag-1, .education-photo-zigzag-3 { justify-self: start; }
+  .education-photo-zigzag-2 { justify-self: end; }
 }
 @media(max-width: 700px) {
   .about-v18-intro { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 3.5rem; }
@@ -370,18 +380,26 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   .photo-zigzag-1, .photo-zigzag-2, .photo-zigzag-3 { justify-self: center; }
   .about-v20-details {
     grid-template-columns: 1fr;
-    grid-template-areas: "education" "photo" "endeavors";
+    grid-template-areas: "education" "photos" "endeavors";
     gap: 0;
     padding-block: 3rem;
   }
-  .about-v20-education-photo { padding: 3rem 0; }
-  .photo-poker-chip-feature { width: min(76vw, 260px); }
+  .about-v20-education-photos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "first second" "third third";
+    gap: 1.5rem .75rem;
+    padding: 3rem 0;
+  }
+  .about-v20-education-photos .photo-poker-chip { width: min(100%, 156px); }
+  .education-photo-zigzag-1, .education-photo-zigzag-2, .education-photo-zigzag-3 { justify-self: center; }
   .about-v20-endeavors { margin-top: 0; padding-top: 3rem; }
   .about-v20-details h2 { font-size: clamp(2.3rem, 12vw, 3.8rem); }
 }
 @media(max-width: 380px) {
   .about-v20-photo-zigzag { grid-template-columns: 1fr; grid-template-areas: "first" "second" "third"; }
   .photo-poker-chip-intro { width: min(66vw, 190px); }
+  .about-v20-education-photos { grid-template-columns: 1fr; grid-template-areas: "first" "second" "third"; }
+  .about-v20-education-photos .photo-poker-chip { width: min(66vw, 190px); }
 }
 @media(prefers-reduced-motion: reduce) {
   .photo-poker-chip-ring { transition: none; }
