@@ -24,7 +24,14 @@ describe("About photo chip configuration", () => {
       "/images/about/chip5.jpg",
       "/images/about/chip6.jpg",
     ]);
-    expect(chips.every((chip) => chip.caption === "Caption placeholder")).toBe(true);
+    expect(chips.map((chip) => chip.caption)).toEqual([
+      "The Best Season",
+      "Yosemite Vernal Falls",
+      "Pasta Night",
+      "Graduation By The Beach",
+      "CruzHacks 2026",
+      "Exploring UC San Diego",
+    ]);
     expect(chips.every((chip) => chip.alt.length > 0)).toBe(true);
     expect(chips.every((chip) => chip.objectPosition)).toBe(true);
   });
