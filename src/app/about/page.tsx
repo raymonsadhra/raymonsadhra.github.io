@@ -26,10 +26,10 @@ export default function About() {
         <div className="about-v18-copy">
           <p>I&apos;m a first-generation college student who started learning to code independently in high school through online courses and YouTube tutorials. What began as curiosity about how software works gradually became an interest in building systems, solving complex problems, and turning ideas into useful applications.</p>
           <p>I earned my B.S. in Computer Science from UC Santa Cruz and am now pursuing my M.S. in Computer Science at UC San Diego. Along the way, I&apos;ve explored software engineering, developer tooling, artificial intelligence, and research through internships and hands-on projects.</p>
-          <p>Outside of programming, I enjoy staying active, working out, playing pickleball, cooking, and finding new things to learn. I value consistency, curiosity, and the process of getting a little better at something over time.</p>
+          <p>Outside of programming, I enjoy staying active, cooking, and learning new things. I value consistency, curiosity, and the process of getting a little better at something over time.</p>
         </div>
       </div>
-      <div className="about-v20-photo-zigzag" aria-label="Personal photo placeholders">
+      <div className="about-v20-photo-zigzag" aria-label="Personal photos">
         {introductionPhotoChips.map((chip, index) => <PhotoPokerChip key={chip.placeholder} {...chip} className={`photo-zigzag-${index + 1}`} />)}
       </div>
     </header>
@@ -43,7 +43,7 @@ export default function About() {
           <article><span>Graduated 2026</span><h3>UC Santa Cruz</h3><p>B.S. Computer Science</p></article>
         </div>
       </div>
-      <div className="about-v20-education-photos" aria-label="Education and current endeavors photo placeholders">
+      <div className="about-v20-education-photos" aria-label="Education and current endeavors photos">
         {educationPhotoChips.map((chip, index) => <PhotoPokerChip key={chip.placeholder} {...chip} className={`education-photo-zigzag-${index + 1}`} />)}
       </div>
       <div className="about-v20-endeavors current-endeavors" aria-labelledby="endeavors-title">

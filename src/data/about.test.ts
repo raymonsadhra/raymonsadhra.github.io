@@ -16,7 +16,16 @@ describe("About photo chip configuration", () => {
       "Photo 05",
       "Photo 06",
     ]);
+    expect(chips.map((chip) => chip.imageSrc)).toEqual([
+      "/images/about/chip1.jpg",
+      "/images/about/chip2.jpg",
+      "/images/about/chip3.jpg",
+      "/images/about/chip4.jpg",
+      "/images/about/chip5.jpg",
+      "/images/about/chip6.jpg",
+    ]);
     expect(chips.every((chip) => chip.caption === "Caption placeholder")).toBe(true);
-    expect(chips.every((chip) => chip.imageSrc === null)).toBe(true);
+    expect(chips.every((chip) => chip.alt.length > 0)).toBe(true);
+    expect(chips.every((chip) => chip.objectPosition)).toBe(true);
   });
 });
