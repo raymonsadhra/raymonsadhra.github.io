@@ -227,3 +227,162 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
 .about-v18-contact a:hover{color:var(--poker-burgundy);border-color:var(--poker-burgundy)}
 .analytics-disclosure{max-width:42rem;margin-top:1.25rem;color:var(--muted);font-size:.78rem;line-height:1.55}
 @media(max-width:700px){.about-v18{padding-top:3rem}.about-v18-intro h1{font-size:clamp(3.1rem,15vw,5rem)}.about-v18-section{grid-template-columns:1fr;gap:1.5rem;padding-block:3rem}.education-entries{grid-template-columns:1fr}.education-entries article,.education-entries article+article{padding:1.35rem 0;border-left:0}.about-v18-contact nav{gap:.6rem 1.2rem}}
+
+/* V20 — About photo chips and left-aligned personal details */
+.about-v18-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  max-width: none;
+  align-items: start;
+}
+.about-v20-intro-copy { min-width: 0; }
+.about-v20-intro-copy h1 { max-width: 650px; }
+.about-v20-photo-zigzag {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: ". first" "second ." ". third";
+  gap: .4rem 1rem;
+  align-items: start;
+  padding-top: 1.25rem;
+}
+.photo-zigzag-1 { grid-area: first; }
+.photo-zigzag-2 { grid-area: second; }
+.photo-zigzag-3 { grid-area: third; }
+.photo-poker-chip {
+  --photo-chip: var(--poker-felt);
+  --photo-chip-accent: var(--poker-gold);
+  width: min(100%, 220px);
+  margin: 0;
+  justify-self: center;
+  text-align: center;
+}
+.photo-poker-chip-feature { width: min(100%, 300px); }
+.photo-poker-chip-burgundy { --photo-chip: var(--poker-burgundy); --photo-chip-accent: var(--poker-ivory); }
+.photo-poker-chip-navy { --photo-chip: #23384d; --photo-chip-accent: #c8d0d4; }
+.photo-poker-chip-ring {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 14.5%;
+  border: 3px solid color-mix(in srgb, var(--photo-chip) 82%, #101713);
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from 5deg, var(--photo-chip-accent) 0 6deg, var(--photo-chip) 6deg 20deg);
+  box-shadow:
+    inset 0 0 0 5px color-mix(in srgb, var(--photo-chip) 82%, #111),
+    inset 0 0 18px rgba(255,255,255,.16),
+    0 16px 32px rgba(20,61,50,.12);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.photo-poker-chip-ring::before {
+  content: "";
+  position: absolute;
+  inset: 11%;
+  border: 2px solid color-mix(in srgb, var(--photo-chip-accent) 76%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.photo-poker-chip-center {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--photo-chip-accent);
+  border-radius: 50%;
+  color: color-mix(in srgb, var(--photo-chip) 62%, #4f5753);
+  background:
+    radial-gradient(circle at 38% 28%, rgba(255,255,255,.7), transparent 32%),
+    linear-gradient(145deg, #e6e1d7, #cbc6bc);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--photo-chip) 68%, transparent);
+}
+.photo-poker-chip-center span {
+  font: 750 .65rem/1 "DM Sans Variable", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+}
+.photo-poker-chip figcaption {
+  margin-top: .65rem;
+  color: #65716c;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.photo-poker-chip:hover .photo-poker-chip-ring {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 0 0 5px color-mix(in srgb, var(--photo-chip) 82%, #111),
+    inset 0 0 18px rgba(255,255,255,.16),
+    0 20px 38px rgba(20,61,50,.16);
+}
+.about-v20-details {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+  grid-template-areas: "education photo" "endeavors photo";
+  gap: 0 clamp(3rem, 7vw, 7rem);
+  padding: clamp(3rem, 6vw, 5rem) 0;
+  border-top: 1px solid rgba(193,160,108,.62);
+}
+.about-v20-education { grid-area: education; }
+.about-v20-education-photo {
+  grid-area: photo;
+  display: grid;
+  place-items: center;
+  align-self: center;
+}
+.about-v20-endeavors {
+  grid-area: endeavors;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  margin-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid rgba(20,61,50,.18);
+}
+.about-v20-details h2 {
+  margin: .45rem 0 0;
+  color: var(--poker-felt);
+  font: 650 clamp(2.3rem, 4.8vw, 4.5rem)/.98 "DM Sans Variable";
+  letter-spacing: -.052em;
+}
+.about-v20-endeavors>p {
+  max-width: 650px;
+  margin: 1.2rem 0 0;
+  color: #607069;
+  font-size: clamp(1.05rem,1.6vw,1.2rem);
+  line-height: 1.75;
+}
+@media(max-width: 980px) {
+  .about-v18-intro { grid-template-columns: minmax(0, 1fr) minmax(300px, .72fr); gap: 2.5rem; }
+  .about-v20-photo-zigzag { grid-template-columns: 1fr; grid-template-areas: "first" "second" "third"; gap: 1.25rem; }
+  .photo-poker-chip-intro { width: min(100%, 190px); }
+  .photo-zigzag-1, .photo-zigzag-3 { justify-self: end; }
+  .photo-zigzag-2 { justify-self: start; }
+  .about-v20-details { grid-template-columns: minmax(0, 1fr) minmax(260px, .7fr); gap: 0 2.5rem; }
+}
+@media(max-width: 700px) {
+  .about-v18-intro { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 3.5rem; }
+  .about-v20-photo-zigzag {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "first second" "third third";
+    gap: 1.5rem .75rem;
+    padding-top: 0;
+  }
+  .photo-poker-chip-intro { width: min(100%, 156px); }
+  .photo-zigzag-1, .photo-zigzag-2, .photo-zigzag-3 { justify-self: center; }
+  .about-v20-details {
+    grid-template-columns: 1fr;
+    grid-template-areas: "education" "photo" "endeavors";
+    gap: 0;
+    padding-block: 3rem;
+  }
+  .about-v20-education-photo { padding: 3rem 0; }
+  .photo-poker-chip-feature { width: min(76vw, 260px); }
+  .about-v20-endeavors { margin-top: 0; padding-top: 3rem; }
+  .about-v20-details h2 { font-size: clamp(2.3rem, 12vw, 3.8rem); }
+}
+@media(max-width: 380px) {
+  .about-v20-photo-zigzag { grid-template-columns: 1fr; grid-template-areas: "first" "second" "third"; }
+  .photo-poker-chip-intro { width: min(66vw, 190px); }
+}
+@media(prefers-reduced-motion: reduce) {
+  .photo-poker-chip-ring { transition: none; }
+}
