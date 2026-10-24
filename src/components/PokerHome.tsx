@@ -47,6 +47,10 @@ export function PokerHome() {
             <ArrowUpRight className="work-arrow" size={19} aria-hidden="true" />
           </Link>)}
         </div>
+        <aside className="coursework-note" aria-labelledby="coursework-note-title">
+          <h3 id="coursework-note-title">Additional Programming Experience</h3>
+          <p>My <strong>C++</strong> experience comes primarily from university coursework, including programming assignments and projects in Data Structures &amp; Algorithms and Algorithm Analysis. My broader computer science coursework includes Operating Systems, Computer Architecture, Compiler Construction, Computer Networks, Distributed Computing &amp; Systems, and Principles of Computer Systems Design.</p>
+        </aside>
       </section>
     </div>
 

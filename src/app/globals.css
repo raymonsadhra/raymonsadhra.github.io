@@ -464,3 +464,30 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
 @media(prefers-reduced-motion: reduce) {
   .selected-work-row[data-keyboard-selected="true"] { transition: none; }
 }
+
+/* Coursework note beneath Featured Work */
+.coursework-note {
+  max-width: 600px;
+  padding: 1.35rem 0 .15rem;
+}
+.coursework-note h3 {
+  margin: 0 0 .55rem;
+  color: var(--v10-red);
+  font: 750 .66rem/1.3 "DM Sans Variable", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+}
+.coursework-note p {
+  margin: 0;
+  color: var(--v10-muted);
+  font-size: .78rem;
+  line-height: 1.68;
+}
+.coursework-note strong {
+  color: var(--v10-green);
+  font-weight: 800;
+}
+@media(max-width: 700px) {
+  .coursework-note { padding-top: 1.2rem; }
+  .coursework-note p { font-size: .76rem; }
+}
