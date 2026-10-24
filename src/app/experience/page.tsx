@@ -2,6 +2,8 @@ import { CaseStudyBackLink } from "@/components/CaseStudyBackLink";
 import { CaseStudyDecisions } from "@/components/CaseStudyDecisions";
 import { PipelineSystemMap } from "@/components/PipelineSystemMap";
 import { PokerChip } from "@/components/PokerChip";
+import { ProjectTechnicalProfile } from "@/components/ProjectTechnicalProfile";
+import { getProjectTechnicalMetadata } from "@/data/projectTechnicalMetadata";
 
 export const metadata = {
   title: "Concentrical — Code Intelligence",
@@ -25,6 +27,7 @@ const stages = [
 ] as const;
 
 export default function Experience() {
+  const technicalMetadata = getProjectTechnicalMetadata("/experience")!;
   return <article className="case case-study-page technical-case concentrical-case shell">
     <CaseStudyBackLink/>
     <header>
@@ -33,6 +36,7 @@ export default function Experience() {
       <p className="case-supporting-headline">Making complex repositories easier to understand.</p>
       <p>Built developer tooling that analyzes source-code repositories, identifies architectural relationships, and generates documentation to help engineers understand unfamiliar codebases.</p>
     </header>
+    <ProjectTechnicalProfile metadata={technicalMetadata}/>
     <div className="case-grid"><aside><span>Role</span><p>Software Engineer Intern | Concentrical | 2025</p><span>Outcome</span><p>A multithreaded repository-analysis engine for architecture mapping and automated documentation refreshes.</p></aside><section><h2>The Problem</h2><p>Large repositories are difficult for new developers to understand because architectural information is scattered across source files, dependencies, configuration, and documentation. Manually maintaining diagrams is time-consuming and quickly becomes outdated, so the project used automated code analysis to produce more current architecture documentation.</p></section></div>
     <CaseStudyDecisions title="Turning source code into architecture context." decisions={decisions}/>
     <PipelineSystemMap summary="The implemented flow scans a repository, parses code structure, extracts architectural relationships, and generates documentation that supports developer onboarding." stages={stages} branch={{ title: "GitHub Actions refresh", detail: "Repository updates trigger a new analysis pass and refreshed documentation." }}/>

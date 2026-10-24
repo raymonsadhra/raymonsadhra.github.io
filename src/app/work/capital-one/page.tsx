@@ -1,5 +1,7 @@
 import { PokerChip } from "@/components/PokerChip";
 import { CaseStudyBackLink } from "@/components/CaseStudyBackLink";
+import { ProjectTechnicalProfile } from "@/components/ProjectTechnicalProfile";
+import { getProjectTechnicalMetadata } from "@/data/projectTechnicalMetadata";
 
 export const metadata = {
   title: "Capital One — SLA Sentry",
@@ -25,6 +27,7 @@ function SectionMarker({ number, label }: { number: string; label: string }) {
 }
 
 export default function CapitalOneCaseStudy() {
+  const technicalMetadata = getProjectTechnicalMetadata("/work/capital-one")!;
   return <article className="case case-study-page capital-one-case capital-sentry-case shell">
     <CaseStudyBackLink/>
     <header>
@@ -33,6 +36,7 @@ export default function CapitalOneCaseStudy() {
       <p className="capital-role">Software Engineer Intern <span>|</span> Capital One <span>|</span> 2026</p>
       <p>A conservative, public-safe account of my work on monitoring, caching, and data-processing workflows. Proprietary system names, internal architecture, and unapproved metrics are intentionally excluded.</p>
     </header>
+    <ProjectTechnicalProfile metadata={technicalMetadata}/>
 
     <section className="capital-sentry-section">
       <SectionMarker number="01" label="Engineering Problem"/>

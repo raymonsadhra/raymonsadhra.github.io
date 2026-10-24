@@ -465,10 +465,10 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   .selected-work-row[data-keyboard-selected="true"] { transition: none; }
 }
 
-/* Coursework note beneath Featured Work */
+/* Coursework note beneath the Featured Work title */
 .coursework-note {
   max-width: 600px;
-  padding: 1.35rem 0 .15rem;
+  padding: .9rem 0 .1rem;
 }
 .coursework-note h3 {
   margin: 0 0 .55rem;
@@ -488,6 +488,83 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   font-weight: 800;
 }
 @media(max-width: 700px) {
-  .coursework-note { padding-top: 1.2rem; }
+  .coursework-note { padding-top: .85rem; }
   .coursework-note p { font-size: .76rem; }
+}
+
+/* Concise Featured Work technology labels */
+.work-meta-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .55rem 1rem;
+}
+.work-meta-row p { margin: 0; }
+.work-stack {
+  max-width: 64%;
+  color: var(--v10-muted);
+  font-size: .58rem;
+  line-height: 1.45;
+  text-align: right;
+}
+.work-stack strong {
+  margin-right: .45rem;
+  color: var(--v10-green);
+  font-size: .54rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+/* Compact technical summary beneath each case-study introduction */
+.project-technical-profile {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  margin: 0 0 clamp(2.75rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.project-technical-profile > div { padding: 1.5rem 1.5rem 1.6rem 0; }
+.project-technical-profile > div + div {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--line);
+}
+.project-technical-profile h2 {
+  margin: 0 0 .85rem;
+  color: var(--poker-burgundy);
+  font: 800 .66rem/1.3 "DM Sans Variable", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+}
+.project-technical-profile ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.project-technical-profile li {
+  position: relative;
+  padding-left: .8rem;
+  color: #53635c;
+  font-size: .78rem;
+  line-height: 1.55;
+}
+.project-technical-profile li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--poker-gold);
+}
+@media(max-width: 700px) {
+  .work-meta-row { flex-wrap: wrap; }
+  .work-stack { width: 100%; max-width: none; text-align: left; }
+  .project-technical-profile { grid-template-columns: 1fr; }
+  .project-technical-profile > div { padding: 1.25rem 0; }
+  .project-technical-profile > div + div { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
 }
