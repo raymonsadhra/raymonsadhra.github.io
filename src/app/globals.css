@@ -494,18 +494,16 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
 
 /* Concise Featured Work technology labels */
 .work-meta-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: .55rem 1rem;
+  display: block;
 }
 .work-meta-row p { margin: 0; }
+.work-meta-row p + p { margin-top: .3rem; }
 .work-stack {
-  max-width: 64%;
+  max-width: none;
   color: var(--v10-muted);
   font-size: .58rem;
   line-height: 1.45;
-  text-align: right;
+  text-align: left;
 }
 .work-stack strong {
   margin-right: .45rem;
@@ -562,8 +560,7 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   background: var(--poker-gold);
 }
 @media(max-width: 700px) {
-  .work-meta-row { flex-wrap: wrap; }
-  .work-stack { width: 100%; max-width: none; text-align: left; }
+  .work-stack { width: 100%; }
   .project-technical-profile { grid-template-columns: 1fr; }
   .project-technical-profile > div { padding: 1.25rem 0; }
   .project-technical-profile > div + div { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
