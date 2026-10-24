@@ -50,7 +50,7 @@ export function PokerHome() {
               <div className="work-marker"><PokerChip label={getWorkMarker(item.title, item.marker)} tone={index % 3 === 0 ? "burgundy" : index % 3 === 1 ? "forest" : "gold"} size="sm" /></div>
               <div className="work-copy">
                 {item.recognition&&<p className="work-recognition">{item.recognition}</p>}
-                <div className="work-meta-row">
+                <div className="work-meta-stack">
                   <p className="work-type">{item.context}</p>
                   {technicalMetadata&&<p className="work-stack"><strong>Tech Stack</strong>{technicalMetadata.homepageStack.join(" · ")}</p>}
                 </div>
