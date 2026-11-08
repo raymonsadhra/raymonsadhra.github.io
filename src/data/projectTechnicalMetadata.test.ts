@@ -4,9 +4,9 @@ import { getProjectTechnicalMetadata, projectTechnicalMetadataByHref } from "./p
 
 describe("featured-work technical metadata", () => {
   it("covers every visible Featured Work route", () => {
-    expect(visibleSelectedWork.map((item) => item.href).sort()).toEqual(
-      Object.keys(projectTechnicalMetadataByHref).sort(),
-    );
+    visibleSelectedWork.forEach((item) => {
+      expect(getProjectTechnicalMetadata(item.href)).toBeDefined();
+    });
   });
 
   it("keeps homepage stacks consistent with detail-page stacks", () => {

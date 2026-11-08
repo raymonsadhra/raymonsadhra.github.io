@@ -465,33 +465,6 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   .selected-work-row[data-keyboard-selected="true"] { transition: none; }
 }
 
-/* Coursework note beneath the Featured Work title */
-.coursework-note {
-  max-width: 600px;
-  padding: .9rem 0 .1rem;
-}
-.coursework-note h3 {
-  margin: 0 0 .55rem;
-  color: var(--v10-red);
-  font: 750 .66rem/1.3 "DM Sans Variable", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .13em;
-}
-.coursework-note p {
-  margin: 0;
-  color: var(--v10-muted);
-  font-size: .78rem;
-  line-height: 1.68;
-}
-.coursework-note strong {
-  color: var(--v10-green);
-  font-weight: 800;
-}
-@media(max-width: 700px) {
-  .coursework-note { padding-top: .85rem; }
-  .coursework-note p { font-size: .76rem; }
-}
-
 /* Concise Featured Work technology labels */
 .work-copy > .work-meta-stack {
   display: flex;
@@ -569,4 +542,60 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   .project-technical-profile { grid-template-columns: 1fr; }
   .project-technical-profile > div { padding: 1.25rem 0; }
   .project-technical-profile > div + div { padding-left: 0; border-top: 1px solid var(--line); border-left: 0; }
+}
+
+/* Biomedical AI simulation and paper resources */
+.biomedical-resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 0 clamp(3rem, 6vw, 5rem);
+  align-items: start;
+}
+.biomedical-resource-grid .linked-project-visual,
+.biomedical-paper-link { min-width: 0; }
+.biomedical-resource-grid .project-visual.large,
+.biomedical-paper-cover {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 0;
+  border: 1px solid rgba(20,61,50,.2);
+  border-radius: 20px;
+  background: #f8f7f2;
+  box-shadow: 0 28px 60px rgba(20,61,50,.12);
+}
+.biomedical-paper-link {
+  display: flex;
+  flex-direction: column;
+  color: var(--poker-felt);
+}
+.biomedical-paper-cover {
+  position: relative;
+  overflow: hidden;
+}
+.biomedical-paper-cover img { padding: clamp(.65rem, 1.5vw, 1.15rem); transition: transform .45s ease; }
+.biomedical-paper-caption {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .9rem .15rem 0;
+  font-size: .82rem;
+  font-weight: 750;
+  line-height: 1.45;
+}
+.biomedical-paper-caption > span { min-width: 0; overflow-wrap: anywhere; }
+.biomedical-paper-caption svg { flex: 0 0 auto; margin-top: .15rem; color: var(--poker-burgundy); }
+.biomedical-paper-link:hover .biomedical-paper-cover img { transform: scale(1.012); }
+.biomedical-paper-link:focus-visible { outline-color: var(--poker-gold); outline-offset: 6px; }
+@media(max-width: 700px) {
+  .biomedical-resource-grid { grid-template-columns: 1fr; }
+}
+@media(prefers-reduced-motion: reduce) {
+  .biomedical-paper-cover img { transition: none; }
+  .biomedical-paper-link:hover .biomedical-paper-cover img { transform: none; }
 }

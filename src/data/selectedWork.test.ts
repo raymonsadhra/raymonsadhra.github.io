@@ -2,15 +2,14 @@ import { describe, expect, it } from "vitest";
 import { getWorkMarker, selectedWork, visibleSelectedWork } from "./selectedWork";
 
 describe("V17 featured work", () => {
-  it("keeps the seven requested entries visible and ordered", () => {
+  it("keeps the six requested entries visible and ordered", () => {
     expect(visibleSelectedWork.map((item) => item.title)).toEqual([
       "Capital One — SLA Sentry",
+      "Biomedical AI",
       "RAG Motion",
       "Terrain-Adaptive Settlements",
       "Ghost Runner",
-      "Concentrical",
       "Tech4Good",
-      "Biomedical AI",
     ]);
   });
 
@@ -19,7 +18,7 @@ describe("V17 featured work", () => {
   });
 
   it("derives meaningful title initials and supports overrides", () => {
-    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "RM", "TS", "GR", "C", "T4G", "BA"]);
+    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "BA", "RM", "TS", "GR", "T4G"]);
     expect(getWorkMarker("Protein Modeling")).toBe("PM");
     expect(getWorkMarker("Causeway")).toBe("C");
     expect(getWorkMarker("Ambiguous Title", "ATX")).toBe("ATX");
@@ -39,12 +38,11 @@ describe("V17 featured work", () => {
   it("uses the approved work-type labels", () => {
     expect(visibleSelectedWork.map((item) => item.context)).toEqual([
       "Software Engineer Internship",
+      "Machine Learning Research",
       "Personal Project",
       "Research Project",
       "Hackathon Project",
-      "Software Engineer Internship",
       "Full-Stack Development",
-      "Machine Learning Research",
     ]);
   });
 

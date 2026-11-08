@@ -8,12 +8,11 @@ describe("analytics configuration", () => {
   it("maps every featured work item to a safe analytics identifier", () => {
     expect(visibleSelectedWork.map((item) => featuredProjectIdByHref[item.href])).toEqual([
       "capital-one",
+      "biomedical-ai",
       "rag-motion",
       "terrain-adaptive",
       "ghost-runner",
-      "concentrical",
       "tech4good",
-      "biomedical-ai",
     ]);
   });
 

@@ -23,5 +23,8 @@ describe("V17 project media", () => {
     expect(biomedical.href).toContain("1di1P8zHzsxFC8r4ZxPAhBm_UDqn2jLqW");
     expect(biomedical.actionLabel).toBe("Watch Model Simulation ↗");
     expect(biomedical.alt).toMatch(/ligand distance/i);
+    expect(biomedical.paper.cover).toBe("/projects/biomedpapercover.png");
+    expect(biomedical.paper.href).toContain("1nyK1Oa_7qGfnvJzNBDL_QohWwpn6inQN");
+    expect(biomedical.paper.title).toBe("ML-based Coarse Grained Protein and Ligand Binding with Chemical and Orientation Embeddings");
   });
 });
