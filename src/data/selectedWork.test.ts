@@ -59,6 +59,7 @@ describe("V17 featured work", () => {
     expect(selectedWork.find((item) => item.title === "Biomedical AI")?.description).toBe(
       "Graph neural network research for modeling protein–ligand interactions using molecular structures and simulation data.",
     );
+    expect(selectedWork.find((item) => item.title === "Biomedical AI")?.recognition).toBe("Resubmitting Original Research");
   });
 
   it("uses the approved Ghost Runner description and keeps its recognition", () => {

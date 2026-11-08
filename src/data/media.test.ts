@@ -26,5 +26,7 @@ describe("V17 project media", () => {
     expect(biomedical.paper.cover).toBe("/projects/biomedpapercover.png");
     expect(biomedical.paper.href).toContain("1nyK1Oa_7qGfnvJzNBDL_QohWwpn6inQN");
     expect(biomedical.paper.title).toBe("ML-based Coarse Grained Protein and Ligand Binding with Chemical and Orientation Embeddings");
+    expect(biomedical.paper.actionLabel).toBe("View Research Paper ↗");
+    expect(biomedical.paper.linkLabel).toMatch(/research paper/i);
   });
 });

@@ -578,18 +578,6 @@ main:has(.about-v18){background:linear-gradient(120deg,rgba(193,160,108,.05),tra
   overflow: hidden;
 }
 .biomedical-paper-cover img { padding: clamp(.65rem, 1.5vw, 1.15rem); transition: transform .45s ease; }
-.biomedical-paper-caption {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: .75rem;
-  padding: .9rem .15rem 0;
-  font-size: .82rem;
-  font-weight: 750;
-  line-height: 1.45;
-}
-.biomedical-paper-caption > span { min-width: 0; overflow-wrap: anywhere; }
-.biomedical-paper-caption svg { flex: 0 0 auto; margin-top: .15rem; color: var(--poker-burgundy); }
 .biomedical-paper-link:hover .biomedical-paper-cover img { transform: scale(1.012); }
 .biomedical-paper-link:focus-visible { outline-color: var(--poker-gold); outline-offset: 6px; }
 @media(max-width: 700px) {

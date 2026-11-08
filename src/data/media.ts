@@ -25,6 +25,8 @@ export const media = {
         href: "https://drive.google.com/file/d/1nyK1Oa_7qGfnvJzNBDL_QohWwpn6inQN/view?usp=drive_link",
         title: "ML-based Coarse Grained Protein and Ligand Binding with Chemical and Orientation Embeddings",
         alt: "First page of the Biomedical AI research paper",
+        actionLabel: "View Research Paper ↗",
+        linkLabel: "View the Biomedical AI research paper",
       },
       gallery: [],
       video: null,

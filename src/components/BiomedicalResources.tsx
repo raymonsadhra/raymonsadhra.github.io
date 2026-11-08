@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
 import type { Project } from "@/data/projects";
 import { media } from "@/data/media";
 import { withBasePath } from "@/data/siteEnvironment";
@@ -16,6 +15,7 @@ export function BiomedicalResources({ project }: { project: Project }) {
       href={paper.href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={paper.linkLabel}
       data-umami-event={analyticsEvents.projectResourceClick}
       data-umami-event-project="biomedical-ai"
       data-umami-event-resource="research_paper"
@@ -28,8 +28,8 @@ export function BiomedicalResources({ project }: { project: Project }) {
           sizes="(max-width: 700px) calc(100vw - 24px), 50vw"
           style={{ objectFit: "contain" }}
         />
+        <span className="project-image-label">{paper.actionLabel}</span>
       </span>
-      <span className="biomedical-paper-caption"><span>{paper.title}</span><ExternalLink size={15} aria-hidden="true"/></span>
     </a>
   </section>;
 }
