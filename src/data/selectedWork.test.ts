@@ -1,12 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { getWorkMarker, selectedWork, visibleSelectedWork } from "./selectedWork";
 
-describe("V17 featured work", () => {
-  it("keeps the six requested entries visible and ordered", () => {
+describe("featured work", () => {
+  it("keeps the seven requested entries visible and ordered", () => {
     expect(visibleSelectedWork.map((item) => item.title)).toEqual([
       "Capital One — SLA Sentry",
-      "Biomedical AI",
+      "Concentrical",
       "RAG Motion",
+      "Biomedical AI",
       "Terrain-Adaptive Settlements",
       "Ghost Runner",
       "Tech4Good",
@@ -18,7 +19,7 @@ describe("V17 featured work", () => {
   });
 
   it("derives meaningful title initials and supports overrides", () => {
-    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "BA", "RM", "TS", "GR", "T4G"]);
+    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "C", "RM", "BA", "TS", "GR", "T4G"]);
     expect(getWorkMarker("Protein Modeling")).toBe("PM");
     expect(getWorkMarker("Causeway")).toBe("C");
     expect(getWorkMarker("Ambiguous Title", "ATX")).toBe("ATX");
@@ -38,8 +39,9 @@ describe("V17 featured work", () => {
   it("uses the approved work-type labels", () => {
     expect(visibleSelectedWork.map((item) => item.context)).toEqual([
       "Software Engineer Internship",
-      "Machine Learning Research",
+      "Software Engineer Internship",
       "Personal Project",
+      "Machine Learning Research",
       "Research Project",
       "Hackathon Project",
       "Full-Stack Development",
@@ -53,9 +55,9 @@ describe("V17 featured work", () => {
   });
 
   it("uses the approved Concentrical and Biomedical AI summaries", () => {
-    expect(selectedWork.find((item) => item.title === "Concentrical")?.description).toBe(
-      "Repository analysis and architecture tooling to help developers onboard onto complex codebases.",
-    );
+    const concentrical = selectedWork.find((item) => item.title === "Concentrical");
+    expect(concentrical?.description).toBe("Multithreaded static analysis that turns large repositories into navigable dependency graphs.");
+    expect(concentrical?.tags).toEqual(["C++", "Node.js", "GitHub Actions"]);
     expect(selectedWork.find((item) => item.title === "Biomedical AI")?.description).toBe(
       "Graph neural network research for modeling protein–ligand interactions using molecular structures and simulation data.",
     );

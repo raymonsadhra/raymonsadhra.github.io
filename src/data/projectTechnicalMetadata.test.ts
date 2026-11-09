@@ -26,9 +26,9 @@ describe("featured-work technical metadata", () => {
     });
   });
 
-  it("does not attribute unverified project experience", () => {
-    const allTechnologies = Object.values(projectTechnicalMetadataByHref).flatMap(({ techStack }) => techStack);
-    expect(allTechnologies).not.toContain("C++");
+  it("uses only verified project technologies", () => {
+    expect(projectTechnicalMetadataByHref["/experience"].homepageStack).toEqual(["C++", "Node.js", "GitHub Actions"]);
+    expect(projectTechnicalMetadataByHref["/experience"].techStack).toContain("Tree-sitter");
     expect(projectTechnicalMetadataByHref["/work/capital-one"].techStack).not.toContain("SQL");
     expect(projectTechnicalMetadataByHref["/work/ghost-runner"].techStack).toEqual(
       expect.arrayContaining(["JavaScript", "Cloud Firestore"]),

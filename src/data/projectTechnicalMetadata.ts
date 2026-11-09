@@ -52,8 +52,8 @@ export const projectTechnicalMetadataByHref = {
     ],
   },
   "/experience": {
-    homepageStack: ["TypeScript", "Node.js", "Tree-sitter", "GitHub Actions"],
-    techStack: ["TypeScript", "Node.js", "Tree-sitter", "GitHub Actions"],
+    homepageStack: ["C++", "Node.js", "GitHub Actions"],
+    techStack: ["C++", "Node.js", "Tree-sitter", "GitHub Actions"],
     coreConcepts: [
       "Software Systems",
       "Compilers and Language Tools",
