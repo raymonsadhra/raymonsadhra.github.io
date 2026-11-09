@@ -7,8 +7,8 @@ describe("featured work", () => {
       "Capital One — SLA Sentry",
       "Concentrical",
       "RAG Motion",
-      "Biomedical AI",
       "Terrain-Adaptive Settlements",
+      "Biomedical AI",
       "Ghost Runner",
       "Tech4Good",
     ]);
@@ -19,7 +19,7 @@ describe("featured work", () => {
   });
 
   it("derives meaningful title initials and supports overrides", () => {
-    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "C", "RM", "BA", "TS", "GR", "T4G"]);
+    expect(visibleSelectedWork.map((item) => getWorkMarker(item.title, item.marker))).toEqual(["CO", "C", "RM", "TS", "BA", "GR", "T4G"]);
     expect(getWorkMarker("Protein Modeling")).toBe("PM");
     expect(getWorkMarker("Causeway")).toBe("C");
     expect(getWorkMarker("Ambiguous Title", "ATX")).toBe("ATX");
@@ -41,8 +41,8 @@ describe("featured work", () => {
       "Software Engineer Internship",
       "Software Engineer Internship",
       "Personal Project",
-      "Machine Learning Research",
       "Research Project",
+      "Machine Learning Research",
       "Hackathon Project",
       "Full-Stack Development",
     ]);

@@ -10,8 +10,8 @@ describe("analytics configuration", () => {
       "capital-one",
       "concentrical",
       "rag-motion",
-      "biomedical-ai",
       "terrain-adaptive",
+      "biomedical-ai",
       "ghost-runner",
       "tech4good",
     ]);
